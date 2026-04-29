@@ -12,22 +12,22 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --color-bg: #F8F5F0;
-  --color-bg-warm: #F0EBE3;
-  --color-bg-deep: #E8E0D4;
-  --color-dark: #1A1714;
-  --color-text: #3A342C;
-  --color-text-light: #78705F;
-  --color-stone: #B8A890;
-  --color-stone-light: #D0C4B0;
-  --color-gold: #A88A5C;
-  --color-gold-light: #C4A878;
-  --color-olive: #6B7A50;
-  --color-olive-muted: #8A9470;
-  --color-sea: #6090A0;
-  --color-walnut: #5A4A3A;
-  --color-cognac: #A06840;
-  --color-cream: #FFFCF7;
+  --color-bg: #EDE7DE;
+  --color-bg-warm: #E4DDD3;
+  --color-bg-deep: #D8D0C4;
+  --color-dark: #17140F;
+  --color-text: #2E2820;
+  --color-text-light: #6E6455;
+  --color-stone: #A89880;
+  --color-stone-light: #C4B8A4;
+  --color-gold: #9A7C4A;
+  --color-gold-light: #B89460;
+  --color-olive: #5E6E44;
+  --color-olive-muted: #7A8462;
+  --color-sea: #4E7E90;
+  --color-walnut: #4A3A2A;
+  --color-cognac: #8E5A30;
+  --color-cream: #FAF7F2;
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
   --font-accent: 'Cormorant', 'Georgia', serif;
@@ -45,6 +45,13 @@ body {
   font-weight: 300;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Warm stone texture overlay on light sections */
+.intro, .gallery, .showcase, .numbers, .experience, .booking {
+  background: var(--color-bg);
+  position: relative;
 }
 
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -150,11 +157,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .hero-media {
   position: absolute; inset: 0;
-  background: url('images/hero-aerial.jpg') center center / cover no-repeat;
+  background: url('images/hero-aerial.jpg') center 35% / cover no-repeat;
 }
 .hero-media::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(26,23,20,0.20) 0%, rgba(26,23,20,0.05) 35%, rgba(26,23,20,0.50) 100%);
+  background: linear-gradient(170deg, rgba(15,12,8,0.60) 0%, rgba(15,12,8,0.20) 45%, rgba(15,12,8,0.70) 100%);
+}
+.hero-media::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(10,8,5,0.35) 100%);
 }
 .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 var(--side-padding); }
 .hero-eyebrow {
@@ -216,13 +227,16 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   font-weight: 300; line-height: 1.3; color: var(--color-dark); margin-bottom: 28px;
 }
 .intro-text { font-size: 0.95rem; line-height: 1.9; color: var(--color-text-light); max-width: 680px; margin: 0 auto; }
+.intro { border-bottom: 1px solid rgba(0,0,0,0.07); }
 
 /* Navis Badge */
 .navis-badge {
   display: flex; align-items: center; justify-content: center; gap: 16px;
-  padding: 40px var(--side-padding); background: var(--color-bg-warm);
-  border-top: 1px solid rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04);
+  padding: 32px var(--side-padding); background: #17140F;
+  border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);
 }
+.navis-badge .navis-badge-line { background: rgba(154,124,74,0.4); }
+.navis-badge .navis-badge-text { color: rgba(250,247,242,0.5); }
 .navis-badge-line { width: 30px; height: 1px; background: var(--color-stone); }
 .navis-badge-text { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-text-light); }
 .navis-badge-text a { color: var(--color-gold); text-decoration: none; font-weight: 500; transition: color 0.3s; }
@@ -233,7 +247,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
    ═══════════════════════════════════════ */
 .gallery { padding: var(--section-padding) 0; }
 .gallery-header { text-align: center; padding: 0 var(--side-padding); margin-bottom: 60px; }
-.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(200px, auto); gap: 6px; padding: 0 6px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(300px, auto); gap: 4px; padding: 0 4px; }
 .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
 .gallery-item img { transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
 .gallery-item:hover img { transform: scale(1.05); }
@@ -250,15 +264,64 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .g4 { grid-column: 1 / 5; }
 .g5 { grid-column: 5 / 9; }
 .g6 { grid-column: 9 / 13; }
+.g1 img { object-position: center 40%; }
+
+/* ═══════════════════════════════════════
+   POOL STATEMENT (full-bleed)
+   ═══════════════════════════════════════ */
+.pool-statement {
+  position: relative; height: 75vh; min-height: 520px; overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+.pool-statement-bg {
+  position: absolute; inset: 0;
+  background: url('images/gallery-pool-garden.jpg') center 60% / cover no-repeat;
+  transform: scale(1.03);
+  transition: transform 8s ease;
+}
+.pool-statement:hover .pool-statement-bg { transform: scale(1.0); }
+.pool-statement-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,12,8,0.85) 0%, rgba(15,12,8,0.30) 45%, rgba(15,12,8,0.05) 100%);
+}
+.pool-statement-content {
+  position: relative; z-index: 2; padding: clamp(40px, 6vw, 80px) var(--side-padding);
+  width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
+}
+.pool-statement-text { max-width: 600px; }
+.pool-statement-quote {
+  font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 300; color: var(--color-cream); line-height: 1.35; font-style: italic;
+  margin-bottom: 16px;
+}
+.pool-statement-attr {
+  font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--color-gold);
+}
+.pool-statement-stat {
+  text-align: right; flex-shrink: 0;
+}
+.pool-statement-stat-val {
+  font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300; color: var(--color-cream); line-height: 1;
+}
+.pool-statement-stat-label {
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,252,247,0.5); margin-top: 6px;
+}
 
 /* ═══════════════════════════════════════
    ESTATE / FEATURES
    ═══════════════════════════════════════ */
-.estate { padding: var(--section-padding) var(--side-padding); background: var(--color-dark); color: var(--color-cream); position: relative; overflow: hidden; }
+.estate { padding: var(--section-padding) var(--side-padding); background: #111009; color: var(--color-cream); position: relative; overflow: hidden; }
 .estate::before {
   content: ''; position: absolute; top: -200px; right: -200px;
-  width: 600px; height: 600px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(168,138,92,0.06) 0%, transparent 70%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(154,124,74,0.10) 0%, transparent 70%);
+}
+.estate::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(154,124,74,0.3), transparent);
 }
 .estate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; }
 .estate-left { display: flex; flex-direction: column; justify-content: center; }
@@ -301,10 +364,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .showcase-card-img img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
 .showcase-card:hover .showcase-card-img img { transform: scale(1.04); }
 .showcase-card-label {
-  padding: 16px 0 8px; font-family: var(--font-display);
-  font-size: 1.15rem; font-weight: 400; color: var(--color-dark);
+  padding: 14px 0 6px; font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 400; color: var(--color-dark); letter-spacing: 0.02em;
 }
-.showcase-card-sub { font-size: 0.72rem; color: var(--color-text-light); letter-spacing: 0.06em; }
+.showcase-card-sub { font-size: 0.68rem; color: var(--color-text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+.showcase-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,12,8,0.4) 0%, transparent 40%);
+  opacity: 0; transition: opacity 0.6s;
+}
+.showcase-card:hover .showcase-card-img::after { opacity: 1; }
+.showcase-card-img { position: relative; }
 
 /* ═══════════════════════════════════════
    NUMBERS BAR
@@ -379,10 +449,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ═══════════════════════════════════════
    NAVIS SECTION
    ═══════════════════════════════════════ */
-.navis { padding: var(--section-padding) var(--side-padding); background: var(--color-dark); position: relative; overflow: hidden; }
+.navis { padding: var(--section-padding) var(--side-padding); background: #0E0C08; position: relative; overflow: hidden; }
 .navis::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(96,144,160,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(168,138,92,0.05) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 20% 50%, rgba(78,126,144,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(154,124,74,0.07) 0%, transparent 60%);
 }
 .navis-content { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; }
 .navis-image { aspect-ratio: 4/3; overflow: hidden; }
@@ -569,6 +639,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     <div class="gallery-item g4" onclick="openLightbox(3)"><img src="images/gallery-interior-seaview.jpg" alt="Interior with panoramic sea view" loading="lazy"></div>
     <div class="gallery-item g5" onclick="openLightbox(4)"><img src="images/gallery-konoba.jpg" alt="Private konoba with fireplace" loading="lazy"></div>
     <div class="gallery-item g6" onclick="openLightbox(5)"><img src="images/wine-cellar.jpg" alt="Wine cellar" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- POOL STATEMENT -->
+<section class="pool-statement">
+  <div class="pool-statement-bg"></div>
+  <div class="pool-statement-overlay"></div>
+  <div class="pool-statement-content">
+    <div class="pool-statement-text reveal">
+      <p class="pool-statement-quote">"A private sanctuary where the Adriatic horizon becomes your own"</p>
+      <span class="pool-statement-attr">Opatija · Croatian Riviera</span>
+    </div>
+    <div class="pool-statement-stat reveal reveal-delay-2">
+      <div class="pool-statement-stat-val">€10<span style="font-size:0.5em;font-style:italic;color:var(--color-gold)">k</span></div>
+      <div class="pool-statement-stat-label">per week · all inclusive</div>
+    </div>
   </div>
 </section>
 
