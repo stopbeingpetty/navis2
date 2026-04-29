@@ -275,7 +275,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .pool-statement-bg {
   position: absolute; inset: 0;
-  background: url('images/gallery-pool-garden.jpg') center 60% / cover no-repeat;
+  overflow: hidden;
+}
+.pool-statement-bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
+  display: block;
 }
 .pool-statement-overlay {
   position: absolute; inset: 0;
@@ -707,7 +711,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 <!-- POOL STATEMENT -->
 <section class="pool-statement">
-  <div class="pool-statement-bg"></div>
+  <div class="pool-statement-bg"><img src="images/exterior-pool.jpg" alt="Private pool with Adriatic sea view" loading="eager"></div>
   <div class="pool-statement-overlay"></div>
   <div class="pool-statement-content">
     <div class="pool-statement-text reveal">
