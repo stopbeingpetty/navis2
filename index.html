@@ -339,7 +339,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .estate-feature-text { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.04em; color: rgba(255,252,247,0.75); }
 
 .estate-right { display: flex; flex-direction: column; }
-.estate-image-main { width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+.estate-image-main { width: 100%; aspect-ratio: 3/4; overflow: hidden; }
 .estate-image-accent {
   width: 70%; aspect-ratio: 16/9; margin-top: 16px; margin-left: auto;
   box-shadow: 0 12px 40px rgba(0,0,0,0.5); overflow: hidden;
@@ -578,7 +578,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   /* Footer */
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
-  .lightbox-nav { display: none; }
+  .lightbox-nav { display: flex; width: 40px; height: 40px; font-size: 1rem; }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
 }
 @media (max-width: 480px) {
   :root { --side-padding: 18px; }
@@ -592,10 +594,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero-cta { padding: 13px 28px; font-size: 0.65rem; }
   .hero-scroll { bottom: 28px; }
 
-  /* Gallery — sve full width, bez praznina */
-  .gallery-grid { grid-template-columns: 1fr; gap: 3px; padding: 0; }
-  .g1, .g2, .g3, .g4, .g5, .g6 { grid-column: 1 / -1; aspect-ratio: 4/3; }
-  .g1 { aspect-ratio: 16/9; }
+  /* Gallery — prva full-width 16:9, ostale u parovima 1:1, nula praznog prostora */
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; padding: 0; }
+  .g1 { grid-column: 1 / -1; grid-row: span 1; aspect-ratio: 16/9; }
+  .g2, .g3, .g4, .g5 { grid-column: span 1; aspect-ratio: 1/1; }
+  .g6 { grid-column: 1 / -1; aspect-ratio: 16/9; }
 
   /* Intro */
   .intro { padding: 60px 18px; }
@@ -728,7 +731,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     <h2 class="intro-heading" data-i18n="gallery_heading">A glimpse into your private escape</h2>
   </div>
   <div class="gallery-grid reveal">
-    <div class="gallery-item g1" onclick="openLightbox(0)"><img src="images/exterior-pool.jpg" alt="Villa exterior with pool and loungers" loading="lazy"></div>
+    <div class="gallery-item g1" onclick="openLightbox(0)"><img src="images/exterior-pool.jpg" alt="Villa exterior with pool and loungers" loading="eager"></div>
     <div class="gallery-item g2" onclick="openLightbox(1)"><img src="images/gallery-master-bedroom.jpg" alt="Master bedroom with sea view" loading="lazy"></div>
     <div class="gallery-item g3" onclick="openLightbox(2)"><img src="images/gallery-pool-garden.jpg" alt="Pool terrace and garden" loading="lazy"></div>
     <div class="gallery-item g4" onclick="openLightbox(3)"><img src="images/gallery-interior-seaview.jpg" alt="Interior with panoramic sea view" loading="lazy"></div>
@@ -871,7 +874,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   <div class="footer-top">
     <div><div class="footer-brand-name">The Residence</div><div class="footer-brand-sub">Opatija · Croatia</div><p class="footer-brand-desc" data-i18n="footer_desc">A private Mediterranean estate by the owners of Design & Boutique Hotel Navis. Available for exclusive weekly rentals during the summer season.</p></div>
     <div class="footer-col"><div class="footer-col-title" data-i18n="footer_quick">Quick Links</div><a href="#estate" data-i18n="nav_estate">The Estate</a><a href="#gallery" data-i18n="nav_gallery">Gallery</a><a href="#experience" data-i18n="nav_experience">Experience</a><a href="#booking" data-i18n="nav_booking">Reservations</a></div>
-    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_contact_title">Contact</div><span>info@theresidence-opatija.com</span><span>+385 XX XXX XXXX</span><a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Hotel Navis ↗</a></div>
+    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_contact_title">Contact</div><span>info@theresidence-opatija.com</span><span>+385 99 21 61 927</span><a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Hotel Navis ↗</a></div>
     <div class="footer-col"><div class="footer-col-title" data-i18n="footer_location">Location</div><span data-i18n="footer_address">Opatija, Croatia</span><span data-i18n="footer_beach">250m to beach</span><span data-i18n="footer_center">10 min to centre</span></div>
   </div>
   <div class="footer-bottom"><span>© 2026 The Residence Opatija. All rights reserved.</span><div class="footer-legal"><a href="#" data-i18n="footer_privacy">Privacy</a><a href="#" data-i18n="footer_terms">Terms</a></div></div>
@@ -889,18 +892,46 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 <script>
 /* ═══ LIGHTBOX ═══ */
 const lbImages = [
-  'images/exterior-pool.jpg','images/gallery-master-bedroom.jpg','images/gallery-pool-garden.jpg',
-  'images/gallery-interior-seaview.jpg','images/gallery-konoba.jpg','images/wine-cellar.jpg',
-  'images/gallery-master-bedroom.jpg','images/bedroom-green.jpg','images/bedroom-pink.jpg',
-  'images/kitchen-living.jpg','images/konoba-exterior.jpg','images/bathroom.jpg','images/wine-cellar.jpg',
-  'images/gallery-aerial.jpg','images/hero-aerial.jpg','images/aerial-seaview.jpg'
+  'images/exterior-pool.jpg',           // 0  gallery g1
+  'images/gallery-master-bedroom.jpg',  // 1  gallery g2
+  'images/gallery-pool-garden.jpg',     // 2  gallery g3
+  'images/gallery-interior-seaview.jpg',// 3  gallery g4
+  'images/wine-cellar.jpg',             // 4  gallery g5
+  'images/gallery-konoba.jpg',          // 5  gallery g6
+  'images/gallery-master-bedroom.jpg',  // 6  showcase: Master Bedroom
+  'images/bedroom-green.jpg',           // 7  showcase: Olive Suite
+  'images/bedroom-pink.jpg',            // 8  showcase: Rose Suite
+  'images/kitchen-living.jpg',          // 9  showcase: Kitchen & Living
+  'images/konoba-exterior.jpg',         // 10 showcase: Konoba
+  'images/bathroom.jpg',                // 11 showcase: Bathrooms
+  'images/wine-cellar.jpg',             // 12 showcase: Wine Cellar
+  'images/gallery-aerial.jpg',          // 13 aerial
+  'images/estate-pool.jpg',             // 14 pool terrace
+  'images/aerial-seaview.jpg'           // 15 exterior sea view
 ];
 let lbIdx = 0;
-function openLightbox(i) { lbIdx = i; document.getElementById('lightboxImg').src = lbImages[i]; document.getElementById('lightboxCounter').textContent = (i+1)+' / '+lbImages.length; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function openLightbox(i) {
+  lbIdx = i;
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = lbImages[i];
+  document.getElementById('lightboxCounter').textContent = (i+1) + ' / ' + lbImages.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function navLightbox(d) { lbIdx = (lbIdx+d+lbImages.length)%lbImages.length; document.getElementById('lightboxImg').src=lbImages[lbIdx]; document.getElementById('lightboxCounter').textContent=(lbIdx+1)+' / '+lbImages.length; }
 document.getElementById('lightbox').addEventListener('click', e => { if(e.target===e.currentTarget) closeLightbox(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowRight') navLightbox(1); if(e.key==='ArrowLeft') navLightbox(-1); });
+
+/* Touch swipe support */
+let _tsX = 0, _tsY = 0;
+const _lb = document.getElementById('lightbox');
+_lb.addEventListener('touchstart', e => { _tsX = e.changedTouches[0].clientX; _tsY = e.changedTouches[0].clientY; }, {passive: true});
+_lb.addEventListener('touchend', e => {
+  const dx = _tsX - e.changedTouches[0].clientX;
+  const dy = Math.abs(_tsY - e.changedTouches[0].clientY);
+  if (Math.abs(dx) > 48 && dy < 80) navLightbox(dx > 0 ? 1 : -1);
+}, {passive: true});
 
 /* ═══ TRANSLATIONS ═══ */
 const T = {
