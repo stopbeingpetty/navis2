@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Residence Opatija — A Private Mediterranean Estate</title>
+<meta name="description" content="An exclusive 250m² private estate in the heart of Opatija. Pool, sea views, world-class design. Weekly rentals from €10,000. By the owners of Design & Boutique Hotel Navis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-bg: #F8F5F0;
+  --color-bg-warm: #F0EBE3;
+  --color-bg-deep: #E8E0D4;
+  --color-dark: #1A1714;
+  --color-text: #3A342C;
+  --color-text-light: #78705F;
+  --color-stone: #B8A890;
+  --color-stone-light: #D0C4B0;
+  --color-gold: #A88A5C;
+  --color-gold-light: #C4A878;
+  --color-olive: #6B7A50;
+  --color-olive-muted: #8A9470;
+  --color-sea: #6090A0;
+  --color-walnut: #5A4A3A;
+  --color-cognac: #A06840;
+  --color-cream: #FFFCF7;
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --font-accent: 'Cormorant', 'Georgia', serif;
+  --section-padding: clamp(80px, 12vh, 160px);
+  --side-padding: clamp(24px, 5vw, 120px);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 var(--side-padding); height: 80px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav.scrolled {
+  background: rgba(248, 245, 240, 0.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+.nav-brand { display: flex; flex-direction: column; gap: 2px; }
+.nav-brand-name {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--color-cream); text-decoration: none; transition: color 0.4s;
+}
+.nav.scrolled .nav-brand-name { color: var(--color-dark); }
+.nav-brand-sub {
+  font-family: var(--font-body); font-size: 0.6rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,252,247,0.6); transition: color 0.4s;
+}
+.nav.scrolled .nav-brand-sub { color: var(--color-text-light); }
+
+.nav-links { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); list-style: none; }
+.nav-links a {
+  font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,252,247,0.85);
+  text-decoration: none; transition: color 0.3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px; background: var(--color-gold);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav.scrolled .nav-links a { color: var(--color-text); }
+
+/* Language Switcher */
+.nav-lang { position: relative; cursor: pointer; }
+.nav-lang-current {
+  font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,252,247,0.85); display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border: 1px solid rgba(255,252,247,0.25); transition: all 0.3s;
+}
+.nav.scrolled .nav-lang-current { color: var(--color-text); border-color: var(--color-stone); }
+.nav-lang-arrow { font-size: 0.5rem; transition: transform 0.3s; }
+.nav-lang.open .nav-lang-arrow { transform: rotate(180deg); }
+.nav-lang-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--color-cream); border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1); min-width: 140px;
+}
+.nav-lang.open .nav-lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-lang-option {
+  display: block; padding: 10px 16px; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--color-text); text-decoration: none; transition: background 0.2s; cursor: pointer;
+}
+.nav-lang-option:hover { background: var(--color-bg-warm); }
+.nav-lang-option.active { color: var(--color-gold); }
+
+/* Hamburger */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 1001; }
+.nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--color-cream); transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.nav.scrolled .nav-hamburger span { background: var(--color-dark); }
+.nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
+
+.mobile-menu {
+  position: fixed; inset: 0; background: var(--color-bg); z-index: 999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu a {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 300;
+  color: var(--color-dark); text-decoration: none; letter-spacing: 0.08em;
+  opacity: 0; transform: translateY(20px); text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mobile-menu.open a { opacity: 1; transform: translateY(0); }
+.mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.open a:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.open a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.open a:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.open a:nth-child(5) { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-media {
+  position: absolute; inset: 0;
+  background: url('images/hero-aerial.jpg') center center / cover no-repeat;
+}
+.hero-media::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,23,20,0.20) 0%, rgba(26,23,20,0.05) 35%, rgba(26,23,20,0.50) 100%);
+}
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 0 var(--side-padding); }
+.hero-eyebrow {
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(255,252,247,0.7); margin-bottom: 24px;
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+.hero-title {
+  font-family: var(--font-display); font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 300; color: var(--color-cream); line-height: 1.05; letter-spacing: 0.02em;
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+.hero-subtitle {
+  font-family: var(--font-accent); font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300; font-style: italic; color: rgba(255,252,247,0.8);
+  margin-top: 20px; letter-spacing: 0.04em;
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+}
+.hero-divider {
+  width: 60px; height: 1px; background: var(--color-gold);
+  margin: 28px auto;
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+}
+.hero-cta {
+  display: inline-block; margin-top: 8px;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--color-cream); text-decoration: none;
+  padding: 16px 40px; border: 1px solid rgba(255,252,247,0.4);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.1s both;
+}
+.hero-cta:hover { background: var(--color-cream); color: var(--color-dark); border-color: var(--color-cream); }
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: heroFadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.4s both;
+}
+.hero-scroll-text { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,252,247,0.5); }
+.hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,252,247,0.5), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+
+@keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scrollPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+/* ═══════════════════════════════════════
+   INTRO
+   ═══════════════════════════════════════ */
+.intro { padding: var(--section-padding) var(--side-padding); max-width: 900px; margin: 0 auto; text-align: center; }
+.section-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 32px; }
+.section-ornament-line { width: 40px; height: 1px; background: var(--color-stone); }
+.section-ornament-diamond { width: 6px; height: 6px; border: 1px solid var(--color-gold); transform: rotate(45deg); }
+.intro-overline {
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.35em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 24px;
+}
+.intro-heading {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300; line-height: 1.3; color: var(--color-dark); margin-bottom: 28px;
+}
+.intro-text { font-size: 0.95rem; line-height: 1.9; color: var(--color-text-light); max-width: 680px; margin: 0 auto; }
+
+/* Navis Badge */
+.navis-badge {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 40px var(--side-padding); background: var(--color-bg-warm);
+  border-top: 1px solid rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.navis-badge-line { width: 30px; height: 1px; background: var(--color-stone); }
+.navis-badge-text { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-text-light); }
+.navis-badge-text a { color: var(--color-gold); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.navis-badge-text a:hover { color: var(--color-cognac); }
+
+/* ═══════════════════════════════════════
+   GALLERY — Masonry-style grid
+   ═══════════════════════════════════════ */
+.gallery { padding: var(--section-padding) 0; }
+.gallery-header { text-align: center; padding: 0 var(--side-padding); margin-bottom: 60px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(200px, auto); gap: 6px; padding: 0 6px; }
+.gallery-item { position: relative; overflow: hidden; cursor: pointer; }
+.gallery-item img { transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-item::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,23,20,0.3) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.5s;
+}
+.gallery-item:hover::after { opacity: 1; }
+
+.g1 { grid-column: 1 / 8; grid-row: span 2; }
+.g2 { grid-column: 8 / 13; }
+.g3 { grid-column: 8 / 13; }
+.g4 { grid-column: 1 / 5; }
+.g5 { grid-column: 5 / 9; }
+.g6 { grid-column: 9 / 13; }
+
+/* ═══════════════════════════════════════
+   ESTATE / FEATURES
+   ═══════════════════════════════════════ */
+.estate { padding: var(--section-padding) var(--side-padding); background: var(--color-dark); color: var(--color-cream); position: relative; overflow: hidden; }
+.estate::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,138,92,0.06) 0%, transparent 70%);
+}
+.estate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; }
+.estate-left { display: flex; flex-direction: column; justify-content: center; }
+.estate-overline {
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.35em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 24px;
+}
+.estate-heading { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.25; margin-bottom: 28px; }
+.estate-text { font-size: 0.9rem; line-height: 1.9; color: rgba(255,252,247,0.65); margin-bottom: 40px; }
+.estate-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; }
+.estate-feature { display: flex; align-items: center; gap: 12px; }
+.estate-feature-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.estate-feature-icon svg { width: 100%; height: 100%; stroke: var(--color-gold); fill: none; stroke-width: 1.5; }
+.estate-feature-text { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.04em; color: rgba(255,252,247,0.75); }
+
+.estate-right { position: relative; }
+.estate-image-main { width: 100%; aspect-ratio: 3/4; overflow: hidden; }
+.estate-image-accent {
+  position: absolute; bottom: -40px; left: -40px; width: 55%; aspect-ratio: 4/3;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4); overflow: hidden;
+  border: 4px solid var(--color-dark);
+}
+
+/* ═══════════════════════════════════════
+   INTERIORS SHOWCASE (Horizontal scroll)
+   ═══════════════════════════════════════ */
+.showcase { padding: var(--section-padding) 0; overflow: hidden; }
+.showcase-header { text-align: center; padding: 0 var(--side-padding); margin-bottom: 48px; }
+.showcase-track {
+  display: flex; gap: 16px; padding: 0 var(--side-padding);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.showcase-track::-webkit-scrollbar { display: none; }
+.showcase-card {
+  flex: 0 0 auto; width: clamp(280px, 30vw, 400px);
+  scroll-snap-align: start; position: relative; overflow: hidden;
+}
+.showcase-card-img { aspect-ratio: 3/4; overflow: hidden; }
+.showcase-card-img img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.showcase-card:hover .showcase-card-img img { transform: scale(1.04); }
+.showcase-card-label {
+  padding: 16px 0 8px; font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 400; color: var(--color-dark);
+}
+.showcase-card-sub { font-size: 0.72rem; color: var(--color-text-light); letter-spacing: 0.06em; }
+
+/* ═══════════════════════════════════════
+   NUMBERS BAR
+   ═══════════════════════════════════════ */
+.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.number-item { text-align: center; padding: 48px 24px; border-right: 1px solid rgba(0,0,0,0.06); }
+.number-item:last-child { border-right: none; }
+.number-value { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; color: var(--color-dark); line-height: 1; }
+.number-unit { font-family: var(--font-accent); font-size: 1rem; font-style: italic; color: var(--color-gold); }
+.number-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-light); margin-top: 8px; }
+
+/* ═══════════════════════════════════════
+   EXPERIENCE
+   ═══════════════════════════════════════ */
+.experience { padding: var(--section-padding) var(--side-padding); }
+.experience-header { text-align: center; max-width: 700px; margin: 0 auto 72px; }
+.experience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+.experience-card {
+  text-align: center; padding: 48px 32px; border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1); position: relative;
+}
+.experience-card::before { content: ''; position: absolute; inset: 0; background: var(--color-bg-warm); opacity: 0; transition: opacity 0.5s; z-index: 0; }
+.experience-card:hover::before { opacity: 1; }
+.experience-card > * { position: relative; z-index: 1; }
+.experience-card-icon { width: 48px; height: 48px; margin: 0 auto 24px; }
+.experience-card-icon svg { width: 100%; height: 100%; stroke: var(--color-gold); fill: none; stroke-width: 1; }
+.experience-card-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--color-dark); margin-bottom: 16px; }
+.experience-card-text { font-size: 0.82rem; line-height: 1.8; color: var(--color-text-light); }
+
+/* ═══════════════════════════════════════
+   BOOKING
+   ═══════════════════════════════════════ */
+.booking { padding: var(--section-padding) var(--side-padding); background: var(--color-bg-warm); }
+.booking-container { max-width: 1000px; margin: 0 auto; }
+.booking-header { text-align: center; margin-bottom: 60px; }
+.booking-note { font-size: 0.75rem; color: var(--color-text-light); text-align: center; margin-top: 8px; font-style: italic; }
+.booking-widget { background: var(--color-cream); border: 1px solid rgba(0,0,0,0.06); padding: 48px; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
+.booking-calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.booking-month { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--color-dark); }
+.booking-nav-btns { display: flex; gap: 8px; }
+.booking-nav-btn {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--color-stone); background: none; cursor: pointer; transition: all 0.3s; color: var(--color-text);
+}
+.booking-nav-btn:hover { background: var(--color-dark); border-color: var(--color-dark); color: var(--color-cream); }
+.booking-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-day-name { text-align: center; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-light); padding: 8px 0 16px; }
+.cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1rem; color: var(--color-text); cursor: pointer; transition: all 0.3s;
+}
+.cal-day:hover { background: var(--color-bg-warm); }
+.cal-day.available { color: var(--color-dark); font-weight: 500; }
+.cal-day.available:hover { background: var(--color-gold); color: var(--color-cream); }
+.cal-day.unavailable { color: var(--color-stone-light); cursor: default; text-decoration: line-through; }
+.cal-day.selected { background: var(--color-dark); color: var(--color-cream); }
+.cal-day.in-range { background: var(--color-bg-deep); }
+.cal-day.empty { cursor: default; }
+
+.booking-details { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,0.06); display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.booking-detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: 6px; }
+.booking-detail-value { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-dark); }
+.booking-submit {
+  grid-column: 1 / -1; margin-top: 16px; padding: 18px 48px;
+  background: var(--color-dark); color: var(--color-cream); border: none;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: all 0.4s; width: 100%;
+}
+.booking-submit:hover { background: var(--color-gold); }
+.booking-guesty-note { text-align: center; margin-top: 24px; font-size: 0.7rem; color: var(--color-text-light); font-style: italic; }
+
+/* ═══════════════════════════════════════
+   NAVIS SECTION
+   ═══════════════════════════════════════ */
+.navis { padding: var(--section-padding) var(--side-padding); background: var(--color-dark); position: relative; overflow: hidden; }
+.navis::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(96,144,160,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(168,138,92,0.05) 0%, transparent 60%);
+}
+.navis-content { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; }
+.navis-image { aspect-ratio: 4/3; overflow: hidden; }
+.navis-overline { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 24px; }
+.navis-heading { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; color: var(--color-cream); line-height: 1.3; margin-bottom: 24px; }
+.navis-desc { font-size: 0.88rem; line-height: 1.9; color: rgba(255,252,247,0.6); margin-bottom: 32px; }
+.navis-link { display: inline-flex; align-items: center; gap: 12px; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold); text-decoration: none; transition: gap 0.3s; }
+.navis-link:hover { gap: 18px; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.footer { padding: 80px var(--side-padding) 40px; background: #141210; color: rgba(255,252,247,0.5); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.footer-brand-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; color: var(--color-cream); letter-spacing: 0.08em; margin-bottom: 4px; }
+.footer-brand-sub { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,252,247,0.3); margin-bottom: 20px; }
+.footer-brand-desc { font-size: 0.82rem; line-height: 1.8; color: rgba(255,252,247,0.4); max-width: 320px; }
+.footer-col-title { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,252,247,0.6); margin-bottom: 20px; }
+.footer-col a, .footer-col span { display: block; font-size: 0.82rem; color: rgba(255,252,247,0.4); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
+.footer-col a:hover { color: var(--color-gold); }
+.footer-bottom { max-width: 1200px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; }
+.footer-legal a { color: rgba(255,252,247,0.3); text-decoration: none; margin-left: 24px; transition: color 0.3s; }
+.footer-legal a:hover { color: var(--color-gold); }
+
+/* ═══════════════════════════════════════
+   LIGHTBOX
+   ═══════════════════════════════════════ */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000; background: rgba(20,18,16,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: all 0.4s;
+  backdrop-filter: blur(10px);
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox-close {
+  position: absolute; top: 24px; right: 24px; width: 48px; height: 48px;
+  background: none; border: 1px solid rgba(255,255,255,0.2); color: white;
+  font-size: 1.2rem; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: all 0.3s; z-index: 2001;
+}
+.lightbox-close:hover { background: white; color: var(--color-dark); }
+.lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; width: auto; height: auto; }
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; background: none;
+  border: 1px solid rgba(255,255,255,0.2); color: white;
+  font-size: 1.2rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; transition: all 0.3s;
+}
+.lightbox-nav:hover { background: white; color: var(--color-dark); }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-counter { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .estate-grid { grid-template-columns: 1fr; gap: 60px; }
+  .estate-right { order: -1; }
+  .estate-image-accent { bottom: -20px; left: -20px; width: 45%; }
+  .navis-content { grid-template-columns: 1fr; gap: 48px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-lang-current { font-size: 0.6rem; padding: 4px 8px; }
+  .hero-title { letter-spacing: 0; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; padding: 0 4px; }
+  .g1 { grid-column: 1 / -1; grid-row: span 1; }
+  .g2, .g3 { grid-column: auto; }
+  .g4, .g5, .g6 { grid-column: auto; }
+  .gallery-item { aspect-ratio: 4/3; }
+  .g1 { aspect-ratio: 16/9; }
+  .numbers { grid-template-columns: 1fr 1fr; }
+  .number-item:nth-child(2) { border-right: none; }
+  .experience-grid { grid-template-columns: 1fr; gap: 24px; }
+  .experience-card { padding: 36px 24px; }
+  .estate-features { grid-template-columns: 1fr; }
+  .booking-widget { padding: 24px; }
+  .booking-details { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .lightbox-nav { display: none; }
+}
+@media (max-width: 480px) {
+  :root { --side-padding: 20px; }
+  .hero { min-height: 600px; }
+  .booking-calendar-grid { gap: 2px; }
+  .cal-day { font-size: 0.85rem; }
+  .showcase-card { width: 260px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-brand">
+    <a href="#" class="nav-brand-name" data-i18n="brand">The Residence</a>
+    <span class="nav-brand-sub" data-i18n="brand_sub">Opatija · Private Estate</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#estate" data-i18n="nav_estate">The Estate</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
+    <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+    <li><a href="#booking" data-i18n="nav_booking">Reservations</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-lang" id="langSwitcher">
+    <div class="nav-lang-current" onclick="toggleLangDropdown()">
+      <span id="currentLang">EN</span>
+      <span class="nav-lang-arrow">▼</span>
+    </div>
+    <div class="nav-lang-dropdown">
+      <div class="nav-lang-option active" onclick="setLanguage('en')">English</div>
+      <div class="nav-lang-option" onclick="setLanguage('hr')">Hrvatski</div>
+      <div class="nav-lang-option" onclick="setLanguage('de')">Deutsch</div>
+      <div class="nav-lang-option" onclick="setLanguage('it')">Italiano</div>
+    </div>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#estate" onclick="closeMobileMenu()" data-i18n="nav_estate">The Estate</a>
+  <a href="#gallery" onclick="closeMobileMenu()" data-i18n="nav_gallery">Gallery</a>
+  <a href="#experience" onclick="closeMobileMenu()" data-i18n="nav_experience">Experience</a>
+  <a href="#booking" onclick="closeMobileMenu()" data-i18n="nav_booking">Reservations</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav_contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">A Private Mediterranean Estate</div>
+    <h1 class="hero-title" data-i18n="hero_title">The Residence<br>Opatija</h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Where the Adriatic meets timeless elegance</p>
+    <div class="hero-divider"></div>
+    <a href="#booking" class="hero-cta" data-i18n="hero_cta">Reserve Your Stay</a>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-text" data-i18n="hero_scroll">Discover</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro reveal">
+  <div class="section-ornament"><div class="section-ornament-line"></div><div class="section-ornament-diamond"></div><div class="section-ornament-line"></div></div>
+  <div class="intro-overline" data-i18n="intro_overline">Welcome</div>
+  <h2 class="intro-heading" data-i18n="intro_heading">A sanctuary of Mediterranean luxury, curated for those who seek the extraordinary</h2>
+  <p class="intro-text" data-i18n="intro_text">Nestled in the heart of Opatija, this exclusive 250m² private estate offers an unparalleled retreat on the Croatian Riviera. Three elegant bedrooms, a private infinity pool, and sweeping Adriatic views — every detail has been thoughtfully designed to deliver an experience that transcends the ordinary.</p>
+</section>
+
+<!-- NAVIS BADGE -->
+<div class="navis-badge reveal">
+  <div class="navis-badge-line"></div>
+  <span class="navis-badge-text" data-i18n="navis_badge">By the owners of <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a></span>
+  <div class="navis-badge-line"></div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-ornament"><div class="section-ornament-line"></div><div class="section-ornament-diamond"></div><div class="section-ornament-line"></div></div>
+    <div class="intro-overline" data-i18n="gallery_overline">Gallery</div>
+    <h2 class="intro-heading" data-i18n="gallery_heading">A glimpse into your private escape</h2>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item g1" onclick="openLightbox(0)"><img src="images/exterior-pool.jpg" alt="Villa exterior with pool and loungers" loading="lazy"></div>
+    <div class="gallery-item g2" onclick="openLightbox(1)"><img src="images/gallery-master-bedroom.jpg" alt="Master bedroom with sea view" loading="lazy"></div>
+    <div class="gallery-item g3" onclick="openLightbox(2)"><img src="images/gallery-pool-garden.jpg" alt="Pool terrace and garden" loading="lazy"></div>
+    <div class="gallery-item g4" onclick="openLightbox(3)"><img src="images/gallery-interior-seaview.jpg" alt="Interior with panoramic sea view" loading="lazy"></div>
+    <div class="gallery-item g5" onclick="openLightbox(4)"><img src="images/gallery-konoba.jpg" alt="Private konoba with fireplace" loading="lazy"></div>
+    <div class="gallery-item g6" onclick="openLightbox(5)"><img src="images/wine-cellar.jpg" alt="Wine cellar" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ESTATE -->
+<section class="estate" id="estate">
+  <div class="estate-grid">
+    <div class="estate-left reveal">
+      <div class="estate-overline" data-i18n="estate_overline">The Estate</div>
+      <h2 class="estate-heading" data-i18n="estate_heading">Every detail designed for distinction</h2>
+      <p class="estate-text" data-i18n="estate_text">Over 250 square metres of refined living space, where world-class architecture meets the warmth of Mediterranean tradition. From the private pool overlooking the Adriatic to the expansive konoba built for gathering — this is a home that honours the art of living well.</p>
+      <div class="estate-features">
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div><span class="estate-feature-text" data-i18n="f_beds">3 Bedrooms</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg></div><span class="estate-feature-text" data-i18n="f_baths">3 Bathrooms + WC</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/></svg></div><span class="estate-feature-text" data-i18n="f_pool">Private Pool</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><path d="M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8z"/><circle cx="12" cy="12" r="3"/></svg></div><span class="estate-feature-text" data-i18n="f_view">Panoramic Sea View</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><span class="estate-feature-text" data-i18n="f_tv">5× Smart TV</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span class="estate-feature-text" data-i18n="f_konoba">Private Konoba</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><path d="M8 2h8l4 10H4L8 2zM12 12v10M5 22h14"/></svg></div><span class="estate-feature-text" data-i18n="f_wine">Wine Cellar</span></div>
+        <div class="estate-feature"><div class="estate-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="estate-feature-text" data-i18n="f_grill">BBQ, Peka &amp; Grill</span></div>
+      </div>
+    </div>
+    <div class="estate-right reveal reveal-delay-2">
+      <div class="estate-image-main"><img src="images/estate-living.jpg" alt="Living room with sea view"></div>
+      <div class="estate-image-accent"><img src="images/estate-pool.jpg" alt="Pool terrace"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERIORS SHOWCASE -->
+<section class="showcase">
+  <div class="showcase-header reveal">
+    <div class="section-ornament"><div class="section-ornament-line"></div><div class="section-ornament-diamond"></div><div class="section-ornament-line"></div></div>
+    <div class="intro-overline" data-i18n="rooms_overline">Rooms &amp; Spaces</div>
+    <h2 class="intro-heading" data-i18n="rooms_heading">Explore every corner</h2>
+  </div>
+  <div class="showcase-track">
+    <div class="showcase-card" onclick="openLightbox(6)"><div class="showcase-card-img"><img src="images/gallery-master-bedroom.jpg" alt="Master Bedroom" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_master">Master Bedroom</div><div class="showcase-card-sub" data-i18n="room_master_sub">Sea view · King bed · En-suite</div></div>
+    <div class="showcase-card" onclick="openLightbox(7)"><div class="showcase-card-img"><img src="images/bedroom-green.jpg" alt="Green Suite" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_green">The Olive Suite</div><div class="showcase-card-sub" data-i18n="room_green_sub">Garden terrace · Smart TV · Desk</div></div>
+    <div class="showcase-card" onclick="openLightbox(8)"><div class="showcase-card-img"><img src="images/bedroom-pink.jpg" alt="Rose Suite" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_rose">The Rose Suite</div><div class="showcase-card-sub" data-i18n="room_rose_sub">Contemporary design · Smart TV</div></div>
+    <div class="showcase-card" onclick="openLightbox(9)"><div class="showcase-card-img"><img src="images/kitchen-living.jpg" alt="Kitchen & Living" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_kitchen">Kitchen &amp; Living</div><div class="showcase-card-sub" data-i18n="room_kitchen_sub">Open plan · Island bar · Premium appliances</div></div>
+    <div class="showcase-card" onclick="openLightbox(10)"><div class="showcase-card-img"><img src="images/konoba-exterior.jpg" alt="Konoba" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_konoba">The Konoba</div><div class="showcase-card-sub" data-i18n="room_konoba_sub">Wood fire · Wine bar · Dining for 12</div></div>
+    <div class="showcase-card" onclick="openLightbox(11)"><div class="showcase-card-img"><img src="images/bathroom.jpg" alt="Bathroom" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_bath">Marble Bathrooms</div><div class="showcase-card-sub" data-i18n="room_bath_sub">Natural stone · Rain shower · Premium fixtures</div></div>
+    <div class="showcase-card" onclick="openLightbox(12)"><div class="showcase-card-img"><img src="images/wine-cellar.jpg" alt="Wine Cellar" loading="lazy"></div><div class="showcase-card-label" data-i18n="room_wine">Wine Cellar</div><div class="showcase-card-sub" data-i18n="room_wine_sub">Curated collection · Temperature controlled</div></div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div class="numbers reveal">
+  <div class="number-item"><div class="number-value">250<span class="number-unit">m²</span></div><div class="number-label" data-i18n="n_living">Living Space</div></div>
+  <div class="number-item"><div class="number-value">250<span class="number-unit">m</span></div><div class="number-label" data-i18n="n_beach">To the Beach</div></div>
+  <div class="number-item"><div class="number-value">10<span class="number-unit"> min</span></div><div class="number-label" data-i18n="n_center">To Opatija Centre</div></div>
+  <div class="number-item"><div class="number-value">3+3</div><div class="number-label" data-i18n="n_rooms">Bedrooms &amp; Baths</div></div>
+</div>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="experience-header reveal">
+    <div class="section-ornament"><div class="section-ornament-line"></div><div class="section-ornament-diamond"></div><div class="section-ornament-line"></div></div>
+    <div class="intro-overline" data-i18n="exp_overline">The Experience</div>
+    <h2 class="intro-heading" data-i18n="exp_heading">Crafted for families and couples who expect nothing less than perfection</h2>
+  </div>
+  <div class="experience-grid">
+    <div class="experience-card reveal">
+      <div class="experience-card-icon"><svg viewBox="0 0 48 48"><path d="M24 4c-8 0-16 7-16 16 0 12 16 24 16 24s16-12 16-24c0-9-8-16-16-16z"/><circle cx="24" cy="20" r="6"/></svg></div>
+      <h3 class="experience-card-title" data-i18n="exp1_title">Prime Location</h3>
+      <p class="experience-card-text" data-i18n="exp1_text">Steps from the Adriatic shoreline, minutes from Opatija's legendary Lungomare promenade, and surrounded by the finest restaurants and cafés of the Croatian Riviera.</p>
+    </div>
+    <div class="experience-card reveal reveal-delay-1">
+      <div class="experience-card-icon"><svg viewBox="0 0 48 48"><path d="M4 44h40M8 44V24l16-16 16 16v20M18 44V32h12v12"/></svg></div>
+      <h3 class="experience-card-title" data-i18n="exp2_title">Architectural Distinction</h3>
+      <p class="experience-card-text" data-i18n="exp2_text">A singular residence with bespoke architectural character — designed not to impress, but to inspire. Every material, angle, and space tells a story of Mediterranean craftsmanship.</p>
+    </div>
+    <div class="experience-card reveal reveal-delay-2">
+      <div class="experience-card-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" stroke-dasharray="4 4"/><path d="M24 12v12l8 8"/></svg></div>
+      <h3 class="experience-card-title" data-i18n="exp3_title">Curated Living</h3>
+      <p class="experience-card-text" data-i18n="exp3_text">From the private konoba with traditional peka to the curated wine cellar and outdoor grill — every amenity has been selected to make your stay effortlessly luxurious.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-container">
+    <div class="booking-header reveal">
+      <div class="section-ornament"><div class="section-ornament-line"></div><div class="section-ornament-diamond"></div><div class="section-ornament-line"></div></div>
+      <div class="intro-overline" data-i18n="book_overline">Reservations</div>
+      <h2 class="intro-heading" data-i18n="book_heading">Reserve your week in paradise</h2>
+      <p class="booking-note" data-i18n="book_note">Minimum stay: 7 nights · Available June through August</p>
+    </div>
+    <div class="booking-widget reveal" id="bookingWidget">
+      <div class="booking-calendar-header">
+        <button class="booking-nav-btn" onclick="changeMonth(-1)">&#8592;</button>
+        <span class="booking-month" id="calendarMonth"></span>
+        <button class="booking-nav-btn" onclick="changeMonth(1)">&#8594;</button>
+      </div>
+      <div class="booking-calendar-grid" id="calendarGrid"></div>
+      <div class="booking-details">
+        <div><div class="booking-detail-label" data-i18n="book_checkin">Check-in</div><div class="booking-detail-value" id="checkinDate" data-i18n="book_select">Select date</div></div>
+        <div><div class="booking-detail-label" data-i18n="book_checkout">Check-out</div><div class="booking-detail-value" id="checkoutDate" data-i18n="book_select">Select date</div></div>
+        <div><div class="booking-detail-label" data-i18n="book_rate">Weekly Rate</div><div class="booking-detail-value">€10,000</div></div>
+        <div><div class="booking-detail-label" data-i18n="book_total_label">Estimated Total</div><div class="booking-detail-value" id="totalPrice">—</div></div>
+        <button class="booking-submit" data-i18n="book_submit" onclick="submitBooking()">Request Reservation</button>
+      </div>
+      <p class="booking-guesty-note" data-i18n="book_guesty">Booking powered by Guesty · You will receive a confirmation within 24 hours</p>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIS -->
+<section class="navis">
+  <div class="navis-content">
+    <div class="navis-image reveal"><img src="images/aerial-seaview.jpg" alt="Aerial view of The Residence and Opatija coastline"></div>
+    <div class="navis-text-content reveal reveal-delay-1">
+      <div class="navis-overline" data-i18n="navis_overline">Our Heritage</div>
+      <h2 class="navis-heading" data-i18n="navis_heading">From the visionaries behind Design &amp; Boutique Hotel Navis</h2>
+      <p class="navis-desc" data-i18n="navis_desc">Hotel Navis has redefined luxury hospitality on the Adriatic coast. That same philosophy of exceptional design, personal service, and meticulous attention to detail now extends to this private estate — offering an intimate alternative to the hotel experience, with the same uncompromising standards.</p>
+      <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener" class="navis-link"><span data-i18n="navis_link">Discover Hotel Navis</span><span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="footer-top">
+    <div><div class="footer-brand-name">The Residence</div><div class="footer-brand-sub">Opatija · Croatia</div><p class="footer-brand-desc" data-i18n="footer_desc">A private Mediterranean estate by the owners of Design & Boutique Hotel Navis. Available for exclusive weekly rentals during the summer season.</p></div>
+    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_quick">Quick Links</div><a href="#estate" data-i18n="nav_estate">The Estate</a><a href="#gallery" data-i18n="nav_gallery">Gallery</a><a href="#experience" data-i18n="nav_experience">Experience</a><a href="#booking" data-i18n="nav_booking">Reservations</a></div>
+    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_contact_title">Contact</div><span>info@theresidence-opatija.com</span><span>+385 XX XXX XXXX</span><a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Hotel Navis ↗</a></div>
+    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_location">Location</div><span data-i18n="footer_address">Opatija, Croatia</span><span data-i18n="footer_beach">250m to beach</span><span data-i18n="footer_center">10 min to centre</span></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 The Residence Opatija. All rights reserved.</span><div class="footer-legal"><a href="#" data-i18n="footer_privacy">Privacy</a><a href="#" data-i18n="footer_terms">Terms</a></div></div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8594;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+/* ═══ LIGHTBOX ═══ */
+const lbImages = [
+  'images/exterior-pool.jpg','images/gallery-master-bedroom.jpg','images/gallery-pool-garden.jpg',
+  'images/gallery-interior-seaview.jpg','images/gallery-konoba.jpg','images/wine-cellar.jpg',
+  'images/gallery-master-bedroom.jpg','images/bedroom-green.jpg','images/bedroom-pink.jpg',
+  'images/kitchen-living.jpg','images/konoba-exterior.jpg','images/bathroom.jpg','images/wine-cellar.jpg',
+  'images/gallery-aerial.jpg','images/hero-aerial.jpg','images/aerial-seaview.jpg'
+];
+let lbIdx = 0;
+function openLightbox(i) { lbIdx = i; document.getElementById('lightboxImg').src = lbImages[i]; document.getElementById('lightboxCounter').textContent = (i+1)+' / '+lbImages.length; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
+function navLightbox(d) { lbIdx = (lbIdx+d+lbImages.length)%lbImages.length; document.getElementById('lightboxImg').src=lbImages[lbIdx]; document.getElementById('lightboxCounter').textContent=(lbIdx+1)+' / '+lbImages.length; }
+document.getElementById('lightbox').addEventListener('click', e => { if(e.target===e.currentTarget) closeLightbox(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowRight') navLightbox(1); if(e.key==='ArrowLeft') navLightbox(-1); });
+
+/* ═══ TRANSLATIONS ═══ */
+const T = {
+  en: {
+    brand:"The Residence", brand_sub:"Opatija · Private Estate",
+    nav_estate:"The Estate", nav_gallery:"Gallery", nav_experience:"Experience", nav_booking:"Reservations", nav_contact:"Contact",
+    hero_eyebrow:"A Private Mediterranean Estate", hero_title:"The Residence<br>Opatija", hero_subtitle:"Where the Adriatic meets timeless elegance", hero_cta:"Reserve Your Stay", hero_scroll:"Discover",
+    intro_overline:"Welcome", intro_heading:"A sanctuary of Mediterranean luxury, curated for those who seek the extraordinary",
+    intro_text:"Nestled in the heart of Opatija, this exclusive 250m² private estate offers an unparalleled retreat on the Croatian Riviera. Three elegant bedrooms, a private infinity pool, and sweeping Adriatic views — every detail has been thoughtfully designed to deliver an experience that transcends the ordinary.",
+    navis_badge:'By the owners of <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    gallery_overline:"Gallery", gallery_heading:"A glimpse into your private escape",
+    estate_overline:"The Estate", estate_heading:"Every detail designed for distinction",
+    estate_text:"Over 250 square metres of refined living space, where world-class architecture meets the warmth of Mediterranean tradition. From the private pool overlooking the Adriatic to the expansive konoba built for gathering — this is a home that honours the art of living well.",
+    f_beds:"3 Bedrooms", f_baths:"3 Bathrooms + WC", f_pool:"Private Pool", f_view:"Panoramic Sea View", f_tv:"5× Smart TV", f_konoba:"Private Konoba", f_wine:"Wine Cellar", f_grill:"BBQ, Peka & Grill",
+    rooms_overline:"Rooms & Spaces", rooms_heading:"Explore every corner",
+    room_master:"Master Bedroom", room_master_sub:"Sea view · King bed · En-suite",
+    room_green:"The Olive Suite", room_green_sub:"Garden terrace · Smart TV · Desk",
+    room_rose:"The Rose Suite", room_rose_sub:"Contemporary design · Smart TV",
+    room_kitchen:"Kitchen & Living", room_kitchen_sub:"Open plan · Island bar · Premium appliances",
+    room_konoba:"The Konoba", room_konoba_sub:"Wood fire · Wine bar · Dining for 12",
+    room_bath:"Marble Bathrooms", room_bath_sub:"Natural stone · Rain shower · Premium fixtures",
+    room_wine:"Wine Cellar", room_wine_sub:"Curated collection · Temperature controlled",
+    n_living:"Living Space", n_beach:"To the Beach", n_center:"To Opatija Centre", n_rooms:"Bedrooms & Baths",
+    exp_overline:"The Experience", exp_heading:"Crafted for families and couples who expect nothing less than perfection",
+    exp1_title:"Prime Location", exp1_text:"Steps from the Adriatic shoreline, minutes from Opatija's legendary Lungomare promenade, and surrounded by the finest restaurants and cafés of the Croatian Riviera.",
+    exp2_title:"Architectural Distinction", exp2_text:"A singular residence with bespoke architectural character — designed not to impress, but to inspire. Every material, angle, and space tells a story of Mediterranean craftsmanship.",
+    exp3_title:"Curated Living", exp3_text:"From the private konoba with traditional peka to the curated wine cellar and outdoor grill — every amenity has been selected to make your stay effortlessly luxurious.",
+    book_overline:"Reservations", book_heading:"Reserve your week in paradise", book_note:"Minimum stay: 7 nights · Available June through August",
+    book_checkin:"Check-in", book_checkout:"Check-out", book_select:"Select date", book_rate:"Weekly Rate", book_total_label:"Estimated Total", book_submit:"Request Reservation",
+    book_guesty:"Booking powered by Guesty · You will receive a confirmation within 24 hours",
+    navis_overline:"Our Heritage", navis_heading:"From the visionaries behind Design & Boutique Hotel Navis",
+    navis_desc:"Hotel Navis has redefined luxury hospitality on the Adriatic coast. That same philosophy of exceptional design, personal service, and meticulous attention to detail now extends to this private estate — offering an intimate alternative to the hotel experience, with the same uncompromising standards.",
+    navis_link:"Discover Hotel Navis",
+    footer_desc:"A private Mediterranean estate by the owners of Design & Boutique Hotel Navis. Available for exclusive weekly rentals during the summer season.",
+    footer_quick:"Quick Links", footer_contact_title:"Contact", footer_location:"Location",
+    footer_address:"Opatija, Croatia", footer_beach:"250m to beach", footer_center:"10 min to centre", footer_privacy:"Privacy", footer_terms:"Terms",
+    cal_days:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+    cal_months:["January","February","March","April","May","June","July","August","September","October","November","December"]
+  },
+  hr: {
+    brand:"The Residence", brand_sub:"Opatija · Privatno imanje",
+    nav_estate:"Imanje", nav_gallery:"Galerija", nav_experience:"Iskustvo", nav_booking:"Rezervacije", nav_contact:"Kontakt",
+    hero_eyebrow:"Privatno mediteransko imanje", hero_title:"The Residence<br>Opatija", hero_subtitle:"Gdje Jadran susreće bezvremensku eleganciju", hero_cta:"Rezervirajte boravak", hero_scroll:"Otkrijte",
+    intro_overline:"Dobrodošli", intro_heading:"Utočište mediteranskog luksuza, za one koji traže izvanredno",
+    intro_text:"U srcu Opatije, ovo ekskluzivno privatno imanje od 250m² nudi neusporediv odmor na Hrvatskoj rivijeri. Tri elegantne spavaće sobe, privatni bazen i panoramski pogled na Jadran — svaki detalj pažljivo je osmišljen kako bi pružio iskustvo koje nadilazi uobičajeno.",
+    navis_badge:'U vlasništvu osnivača <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotela Navis</a>',
+    gallery_overline:"Galerija", gallery_heading:"Pogled u vaš privatni raj",
+    estate_overline:"Imanje", estate_heading:"Svaki detalj dizajniran za izvrsnost",
+    estate_text:"Preko 250 četvornih metara profinjenoga životnog prostora, gdje se vrhunska arhitektura susreće s toplinom mediteranske tradicije. Od privatnog bazena s pogledom na Jadran do prostrane konobe stvorene za druženje — ovo je dom koji njeguje umijeće lijepog življenja.",
+    f_beds:"3 Spavaće sobe", f_baths:"3 Kupaonice + WC", f_pool:"Privatni bazen", f_view:"Panoramski pogled", f_tv:"5× Smart TV", f_konoba:"Privatna konoba", f_wine:"Vinski podrum", f_grill:"Roštilj, peka i BBQ",
+    rooms_overline:"Sobe i prostori", rooms_heading:"Istražite svaki kutak",
+    room_master:"Glavna spavaća", room_master_sub:"Pogled na more · Bračni krevet · Kupaonica",
+    room_green:"Maslinova soba", room_green_sub:"Vrtna terasa · Smart TV · Radni stol",
+    room_rose:"Ružičasta soba", room_rose_sub:"Suvremeni dizajn · Smart TV",
+    room_kitchen:"Kuhinja i dnevni", room_kitchen_sub:"Otvoreni plan · Otok-bar · Premium aparati",
+    room_konoba:"Konoba", room_konoba_sub:"Kamin · Vinski bar · Stol za 12",
+    room_bath:"Mramorne kupaonice", room_bath_sub:"Prirodni kamen · Kišni tuš · Premium armatura",
+    room_wine:"Vinski podrum", room_wine_sub:"Kurirana kolekcija · Kontrolirana temperatura",
+    n_living:"Stambeni prostor", n_beach:"Do plaže", n_center:"Do centra Opatije", n_rooms:"Sobe i kupaonice",
+    exp_overline:"Iskustvo", exp_heading:"Osmišljeno za obitelji i parove koji ne pristaju na manje od savršenstva",
+    exp1_title:"Vrhunska lokacija", exp1_text:"Nekoliko koraka od Jadrana, minutu od legendarne opatijske šetnice Lungomare, okruženi najboljim restoranima i kafićima Hrvatske rivijere.",
+    exp2_title:"Arhitektonska posebnost", exp2_text:"Jedinstvena rezidencija s prepoznatljivim arhitektonskim karakterom — dizajnirana ne da impresionira, već da inspirira.",
+    exp3_title:"Kurirani životni stil", exp3_text:"Od privatne konobe s tradicionalnom pekom do kuriranog vinskog podruma i vanjskog roštilja — svaki sadržaj pažljivo je odabran za besprijekorno luksuzan boravak.",
+    book_overline:"Rezervacije", book_heading:"Rezervirajte svoj tjedan u raju", book_note:"Minimalni boravak: 7 noći · Dostupno od lipnja do kolovoza",
+    book_checkin:"Dolazak", book_checkout:"Odlazak", book_select:"Odaberite datum", book_rate:"Tjedna cijena", book_total_label:"Procijenjeni ukupni iznos", book_submit:"Zatraži rezervaciju",
+    book_guesty:"Rezervacije putem sustava Guesty · Potvrdu ćete primiti u roku od 24 sata",
+    navis_overline:"Naše nasljeđe", navis_heading:"Od vizionara koji stoje iza Design & Boutique Hotela Navis",
+    navis_desc:"Hotel Navis redefinirao je luksuzno ugostiteljstvo na jadranskoj obali. Ista filozofija iznimnog dizajna, osobne usluge i pažnje prema detaljima sada se proteže i na ovo privatno imanje.",
+    navis_link:"Otkrijte Hotel Navis",
+    footer_desc:"Privatno mediteransko imanje u vlasništvu osnivača Design & Boutique Hotela Navis.", footer_quick:"Brze poveznice", footer_contact_title:"Kontakt", footer_location:"Lokacija",
+    footer_address:"Opatija, Hrvatska", footer_beach:"250m do plaže", footer_center:"10 min do centra", footer_privacy:"Privatnost", footer_terms:"Uvjeti",
+    cal_days:["Pon","Uto","Sri","Čet","Pet","Sub","Ned"],
+    cal_months:["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipanj","Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac"]
+  },
+  de: {
+    brand:"The Residence", brand_sub:"Opatija · Privates Anwesen",
+    nav_estate:"Das Anwesen", nav_gallery:"Galerie", nav_experience:"Erlebnis", nav_booking:"Reservierung", nav_contact:"Kontakt",
+    hero_eyebrow:"Ein privates mediterranes Anwesen", hero_title:"The Residence<br>Opatija", hero_subtitle:"Wo die Adria auf zeitlose Eleganz trifft", hero_cta:"Aufenthalt reservieren", hero_scroll:"Entdecken",
+    intro_overline:"Willkommen", intro_heading:"Ein Refugium mediterranen Luxus, kuratiert für jene, die das Außergewöhnliche suchen",
+    intro_text:"Im Herzen von Opatija bietet dieses exklusive private Anwesen mit über 250m² einen unvergleichlichen Rückzugsort an der Kroatischen Riviera. Drei elegante Schlafzimmer, ein privater Pool und ein atemberaubender Blick auf die Adria.",
+    navis_badge:'Von den Eigentümern des <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    gallery_overline:"Galerie", gallery_heading:"Ein Einblick in Ihre private Oase",
+    estate_overline:"Das Anwesen", estate_heading:"Jedes Detail für Exzellenz gestaltet",
+    estate_text:"Über 250 Quadratmeter raffinierter Wohnraum, wo Weltklasse-Architektur auf die Wärme mediterraner Tradition trifft.",
+    f_beds:"3 Schlafzimmer", f_baths:"3 Badezimmer + WC", f_pool:"Privater Pool", f_view:"Panorama-Meerblick", f_tv:"5× Smart TV", f_konoba:"Private Konoba", f_wine:"Weinkeller", f_grill:"BBQ, Peka & Grill",
+    rooms_overline:"Räume & Bereiche", rooms_heading:"Jeden Winkel erkunden",
+    room_master:"Hauptschlafzimmer", room_master_sub:"Meerblick · Kingsize · Ensuite",
+    room_green:"Die Olivensuite", room_green_sub:"Gartenterrasse · Smart TV · Schreibtisch",
+    room_rose:"Die Rosensuite", room_rose_sub:"Zeitgenössisches Design · Smart TV",
+    room_kitchen:"Küche & Wohnen", room_kitchen_sub:"Offener Grundriss · Kücheninsel · Premiumgeräte",
+    room_konoba:"Die Konoba", room_konoba_sub:"Holzfeuer · Weinbar · Platz für 12",
+    room_bath:"Marmorbäder", room_bath_sub:"Naturstein · Regendusche · Premium-Armaturen",
+    room_wine:"Weinkeller", room_wine_sub:"Kuratierte Sammlung · Temperaturkontrolliert",
+    n_living:"Wohnfläche", n_beach:"Zum Strand", n_center:"Zum Zentrum", n_rooms:"Zimmer & Bäder",
+    exp_overline:"Das Erlebnis", exp_heading:"Geschaffen für Familien und Paare, die Perfektion erwarten",
+    exp1_title:"Beste Lage", exp1_text:"Wenige Schritte von der Adriaküste, Minuten von Opatijas legendärer Lungomare-Promenade entfernt.",
+    exp2_title:"Architektonische Auszeichnung", exp2_text:"Eine einzigartige Residenz mit maßgeschneidertem Charakter — gestaltet nicht um zu beeindrucken, sondern um zu inspirieren.",
+    exp3_title:"Kuratiertes Wohnen", exp3_text:"Von der Konoba mit Peka bis zum Weinkeller und Außengrill — jede Annehmlichkeit wurde für mühelosen Luxus ausgewählt.",
+    book_overline:"Reservierung", book_heading:"Reservieren Sie Ihre Woche im Paradies", book_note:"Mindestaufenthalt: 7 Nächte · Juni bis August",
+    book_checkin:"Anreise", book_checkout:"Abreise", book_select:"Datum wählen", book_rate:"Wochenpreis", book_total_label:"Geschätzter Gesamtbetrag", book_submit:"Reservierung anfragen",
+    book_guesty:"Buchung über Guesty · Bestätigung innerhalb von 24 Stunden",
+    navis_overline:"Unser Erbe", navis_heading:"Von den Visionären hinter dem Design & Boutique Hotel Navis",
+    navis_desc:"Hotel Navis hat die Luxus-Gastfreundschaft an der Adriaküste neu definiert. Dieselbe Philosophie erstreckt sich nun auf dieses private Anwesen.",
+    navis_link:"Hotel Navis entdecken",
+    footer_desc:"Ein privates Anwesen der Eigentümer des Design & Boutique Hotel Navis.", footer_quick:"Schnelllinks", footer_contact_title:"Kontakt", footer_location:"Standort",
+    footer_address:"Opatija, Kroatien", footer_beach:"250m zum Strand", footer_center:"10 Min zum Zentrum", footer_privacy:"Datenschutz", footer_terms:"AGB",
+    cal_days:["Mo","Di","Mi","Do","Fr","Sa","So"],
+    cal_months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"]
+  },
+  it: {
+    brand:"The Residence", brand_sub:"Abbazia · Tenuta Privata",
+    nav_estate:"La Tenuta", nav_gallery:"Galleria", nav_experience:"Esperienza", nav_booking:"Prenotazioni", nav_contact:"Contatti",
+    hero_eyebrow:"Una tenuta mediterranea privata", hero_title:"The Residence<br>Opatija", hero_subtitle:"Dove l'Adriatico incontra l'eleganza senza tempo", hero_cta:"Prenota il tuo soggiorno", hero_scroll:"Scopri",
+    intro_overline:"Benvenuti", intro_heading:"Un santuario di lusso mediterraneo, curato per chi cerca lo straordinario",
+    intro_text:"Nel cuore di Abbazia, questa esclusiva tenuta privata di 250m² offre un rifugio senza pari sulla Riviera Croata. Tre eleganti camere, piscina privata e vista mozzafiato sull'Adriatico.",
+    navis_badge:'Dai proprietari del <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    gallery_overline:"Galleria", gallery_heading:"Uno sguardo alla vostra fuga privata",
+    estate_overline:"La Tenuta", estate_heading:"Ogni dettaglio progettato per l'eccellenza",
+    estate_text:"Oltre 250 metri quadrati di spazio raffinato, dove l'architettura di livello mondiale incontra il calore della tradizione mediterranea.",
+    f_beds:"3 Camere", f_baths:"3 Bagni + WC", f_pool:"Piscina privata", f_view:"Vista panoramica", f_tv:"5× Smart TV", f_konoba:"Konoba privata", f_wine:"Cantina vini", f_grill:"BBQ, Peka e Grill",
+    rooms_overline:"Spazi", rooms_heading:"Esplorate ogni angolo",
+    room_master:"Camera principale", room_master_sub:"Vista mare · Letto king · Ensuite",
+    room_green:"Suite Oliva", room_green_sub:"Terrazza giardino · Smart TV · Scrivania",
+    room_rose:"Suite Rosa", room_rose_sub:"Design contemporaneo · Smart TV",
+    room_kitchen:"Cucina e Soggiorno", room_kitchen_sub:"Open plan · Isola bar · Elettrodomestici premium",
+    room_konoba:"La Konoba", room_konoba_sub:"Fuoco a legna · Wine bar · Tavolo per 12",
+    room_bath:"Bagni in marmo", room_bath_sub:"Pietra naturale · Doccia rain · Rubinetteria premium",
+    room_wine:"Cantina vini", room_wine_sub:"Collezione curata · Temperatura controllata",
+    n_living:"Superficie", n_beach:"Alla spiaggia", n_center:"Al centro", n_rooms:"Camere e bagni",
+    exp_overline:"L'Esperienza", exp_heading:"Creata per famiglie e coppie che non accettano meno della perfezione",
+    exp1_title:"Posizione privilegiata", exp1_text:"A pochi passi dalla costa adriatica, a minuti dal leggendario Lungomare di Abbazia.",
+    exp2_title:"Distinzione architettonica", exp2_text:"Una residenza unica — progettata non per impressionare, ma per ispirare.",
+    exp3_title:"Vivere curato", exp3_text:"Dalla konoba con peka alla cantina curata e al barbecue — ogni comfort per un soggiorno lussuoso senza sforzo.",
+    book_overline:"Prenotazioni", book_heading:"Prenotate la vostra settimana in paradiso", book_note:"Soggiorno minimo: 7 notti · Giugno - Agosto",
+    book_checkin:"Check-in", book_checkout:"Check-out", book_select:"Seleziona data", book_rate:"Tariffa settimanale", book_total_label:"Totale stimato", book_submit:"Richiedi prenotazione",
+    book_guesty:"Prenotazione tramite Guesty · Conferma entro 24 ore",
+    navis_overline:"La Nostra Eredità", navis_heading:"Dai visionari dietro il Design & Boutique Hotel Navis",
+    navis_desc:"L'Hotel Navis ha ridefinito l'ospitalità di lusso sulla costa adriatica. La stessa filosofia si estende ora a questa tenuta privata.",
+    navis_link:"Scopri Hotel Navis",
+    footer_desc:"Una tenuta privata dei proprietari del Design & Boutique Hotel Navis.", footer_quick:"Link rapidi", footer_contact_title:"Contatti", footer_location:"Posizione",
+    footer_address:"Abbazia, Croazia", footer_beach:"250m alla spiaggia", footer_center:"10 min al centro", footer_privacy:"Privacy", footer_terms:"Termini",
+    cal_days:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
+    cal_months:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"]
+  }
+};
+
+let currentLang = 'en';
+function setLanguage(lang) {
+  currentLang = lang; document.documentElement.lang = lang;
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if(t[k]) el.innerHTML = t[k]; });
+  document.getElementById('currentLang').textContent = lang.toUpperCase();
+  document.querySelectorAll('.nav-lang-option').forEach(o => o.classList.remove('active'));
+  document.querySelectorAll('.nav-lang-option').forEach(o => { if(o.textContent.toLowerCase().includes(lang==='en'?'english':lang==='hr'?'hrvatski':lang==='de'?'deutsch':'italiano')) o.classList.add('active'); });
+  toggleLangDropdown(); renderCalendar();
+}
+
+/* ═══ NAV ═══ */
+function toggleLangDropdown() { document.getElementById('langSwitcher').classList.toggle('open'); }
+document.addEventListener('click', e => { if(!e.target.closest('.nav-lang')) document.getElementById('langSwitcher').classList.remove('open'); });
+let mobileOpen = false;
+function toggleMobileMenu() { mobileOpen=!mobileOpen; document.getElementById('hamburger').classList.toggle('open',mobileOpen); document.getElementById('mobileMenu').classList.toggle('open',mobileOpen); document.body.style.overflow=mobileOpen?'hidden':''; }
+function closeMobileMenu() { mobileOpen=false; document.getElementById('hamburger').classList.remove('open'); document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow=''; }
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60); });
+
+/* ═══ CALENDAR ═══ */
+let calYear=2026, calMonth=5, checkin=null, checkout=null;
+const seasonStart=new Date(2026,5,1), seasonEnd=new Date(2026,7,31);
+function isAvailable(d) { return d>=seasonStart&&d<=seasonEnd; }
+function formatDate(d) { if(!d) return T[currentLang].book_select||'Select date'; return d.getDate()+' '+T[currentLang].cal_months[d.getMonth()]+' '+d.getFullYear(); }
+function renderCalendar() {
+  const t=T[currentLang], grid=document.getElementById('calendarGrid'); grid.innerHTML='';
+  document.getElementById('calendarMonth').textContent=t.cal_months[calMonth]+' '+calYear;
+  t.cal_days.forEach(d => { const e=document.createElement('div'); e.className='cal-day-name'; e.textContent=d; grid.appendChild(e); });
+  let s=new Date(calYear,calMonth,1).getDay()-1; if(s<0) s=6;
+  for(let i=0;i<s;i++){const e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
+  const dim=new Date(calYear,calMonth+1,0).getDate();
+  for(let d=1;d<=dim;d++){
+    const date=new Date(calYear,calMonth,d), el=document.createElement('div'); el.className='cal-day'; el.textContent=d;
+    if(isAvailable(date)){
+      el.classList.add('available'); el.addEventListener('click',()=>selectDate(date));
+      if(checkin&&checkout){ if(date>=checkin&&date<=checkout)el.classList.add('in-range'); if(date.getTime()===checkin.getTime()||date.getTime()===checkout.getTime())el.classList.add('selected'); }
+      else if(checkin&&date.getTime()===checkin.getTime()) el.classList.add('selected');
+    } else { el.classList.add('unavailable'); }
+    grid.appendChild(el);
+  }
+}
+function selectDate(date) {
+  if(!checkin||checkout){checkin=date;checkout=null;} else { if(date<=checkin)checkin=date; else checkout=date; }
+  document.getElementById('checkinDate').textContent=formatDate(checkin);
+  document.getElementById('checkoutDate').textContent=formatDate(checkout);
+  if(checkin&&checkout){const n=Math.round((checkout-checkin)/(864e5)); if(n>=7){document.getElementById('totalPrice').textContent='€'+(Math.ceil(n/7)*10000).toLocaleString();}else{document.getElementById('totalPrice').textContent='Min. 7 nights';}}
+  else{document.getElementById('totalPrice').textContent='—';}
+  renderCalendar();
+}
+function changeMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function submitBooking(){
+  if(!checkin||!checkout){alert(currentLang==='hr'?'Molimo odaberite datume.':'Please select dates.');return;}
+  const n=Math.round((checkout-checkin)/864e5);
+  if(n<7){alert(currentLang==='hr'?'Minimalni boravak je 7 noći.':'Minimum stay is 7 nights.');return;}
+  alert(currentLang==='hr'?'Hvala! Vaš zahtjev za rezervaciju je poslan.':'Thank you! Your reservation request has been submitted. We will contact you within 24 hours.');
+}
+
+/* ═══ SCROLL REVEAL ═══ */
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+renderCalendar();
+</script>
+</body>
+</html>
