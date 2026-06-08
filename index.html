@@ -338,6 +338,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .estate-feature-text { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.04em; color: rgba(255,252,247,0.75); }
 
 .estate-right { display: flex; flex-direction: column; }
+.estate-image-main, .estate-image-accent, .navis-image { cursor: pointer; }
 .estate-image-main { width: 100%; aspect-ratio: 3/4; overflow: hidden; }
 .estate-image-accent {
   width: 70%; aspect-ratio: 16/9; margin-top: 16px; margin-left: auto;
@@ -462,9 +463,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .footer-col-title { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,252,247,0.6); margin-bottom: 20px; }
 .footer-col a, .footer-col span { display: block; font-size: 0.82rem; color: rgba(255,252,247,0.4); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
 .footer-col a:hover { color: var(--color-gold); }
-.footer-bottom { max-width: 1200px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; }
-.footer-legal a { color: rgba(255,252,247,0.3); text-decoration: none; margin-left: 24px; transition: color 0.3s; }
-.footer-legal a:hover { color: var(--color-gold); }
+.footer-bottom { max-width: 1200px; margin: 32px auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; gap: 16px; }
+.footer-operator { color: rgba(255,252,247,0.3); letter-spacing: 0.04em; }
 
 /* ═══════════════════════════════════════
    LIGHTBOX
@@ -525,6 +525,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero-title { letter-spacing: 0; }
 
   /* Gallery — 2 colonne, nema praznog prostora */
+  .gallery { padding: 72px 0 0; }
+  .gallery-header { margin-bottom: 36px; }
   .gallery-grid {
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
@@ -584,7 +586,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .hero-scroll { bottom: 28px; }
 
   /* Gallery — prva full-width 16:9, ostale u parovima 1:1, nula praznog prostora */
-  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; padding: 0; }
+  .gallery { padding: 56px 0 0; }
+  .gallery-header { margin-bottom: 28px; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 4px; padding: 0; }
   .g1 { grid-column: 1 / -1; grid-row: span 1; aspect-ratio: 16/9; }
   .g2, .g3, .g4, .g5 { grid-column: span 1; aspect-ratio: 1/1; }
   .g6 { grid-column: 1 / -1; aspect-ratio: 16/9; }
@@ -638,6 +642,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .footer { padding: 56px 18px 28px; }
   .footer-brand-name { font-size: 1.2rem; }
   .footer-col a, .footer-col span { font-size: 0.78rem; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; margin-top: 28px; }
+  .footer-operator { font-size: 0.66rem; }
 }
 </style>
 </head>
@@ -706,7 +712,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 <!-- NAVIS BADGE -->
 <div class="navis-badge reveal">
   <div class="navis-badge-line"></div>
-  <span class="navis-badge-text" data-i18n="navis_badge">Same architect as <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a></span>
+  <span class="navis-badge-text" data-i18n="navis_badge">Same architect as Design &amp; Boutique Hotel Navis</span>
   <div class="navis-badge-line"></div>
 </div>
 
@@ -758,8 +764,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
       </div>
     </div>
     <div class="estate-right reveal reveal-delay-2">
-      <div class="estate-image-main"><img src="images/estate-living.jpg" alt="Living room with sea view"></div>
-      <div class="estate-image-accent"><img src="images/estate-pool.jpg" alt="Pool terrace"></div>
+      <div class="estate-image-main" onclick="openLightbox(16)"><img src="images/estate-living.jpg" alt="Living room with sea view"></div>
+      <div class="estate-image-accent" onclick="openLightbox(14)"><img src="images/estate-pool.jpg" alt="Pool terrace"></div>
     </div>
   </div>
 </section>
@@ -849,12 +855,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 <!-- NAVIS -->
 <section class="navis">
   <div class="navis-content">
-    <div class="navis-image reveal"><img src="images/aerial-seaview.jpg" alt="Aerial view of Villa Navis and the Opatija coastline"></div>
+    <div class="navis-image reveal" onclick="openLightbox(15)"><img src="images/aerial-seaview.jpg" alt="Aerial view of Villa Navis and the Opatija coastline"></div>
     <div class="navis-text-content reveal reveal-delay-1">
       <div class="navis-overline" data-i18n="navis_overline">Our Heritage</div>
       <h2 class="navis-heading" data-i18n="navis_heading">By the architect behind Design &amp; Boutique Hotel Navis</h2>
       <p class="navis-desc" data-i18n="navis_desc">Hotel Navis has redefined luxury hospitality on the Adriatic coast. That same philosophy of exceptional design, personal service, and meticulous attention to detail now extends to this private estate — offering an intimate alternative to the hotel experience, with the same uncompromising standards.</p>
-      <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener" class="navis-link"><span data-i18n="navis_link">Discover Hotel Navis</span><span>→</span></a>
     </div>
   </div>
 </section>
@@ -864,10 +869,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   <div class="footer-top">
     <div><div class="footer-brand-name">Villa Navis</div><div class="footer-brand-sub">Opatija · Croatia</div><p class="footer-brand-desc" data-i18n="footer_desc">A private Mediterranean estate shaped by the same architect as Design & Boutique Hotel Navis.</p></div>
     <div class="footer-col"><div class="footer-col-title" data-i18n="footer_quick">Quick Links</div><a href="#estate" data-i18n="nav_estate">The Estate</a><a href="#gallery" data-i18n="nav_gallery">Gallery</a><a href="#experience" data-i18n="nav_experience">Experience</a><a href="#booking" data-i18n="nav_booking">Reservations</a></div>
-    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_contact_title">Contact</div><a href="mailto:davor.kapetanovic@gmail.com">davor.kapetanovic@gmail.com</a><a href="tel:+385992161927">+385 99 216 1927</a><a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Hotel Navis ↗</a></div>
+    <div class="footer-col"><div class="footer-col-title" data-i18n="footer_contact_title">Contact</div><a href="mailto:davor.kapetanovic@gmail.com">davor.kapetanovic@gmail.com</a><a href="tel:+385992161927">+385 99 216 1927</a></div>
     <div class="footer-col"><div class="footer-col-title" data-i18n="footer_location">Location</div><span data-i18n="footer_address">Opatija, Croatia</span><span data-i18n="footer_beach">250m to beach</span><span data-i18n="footer_center">10 min to centre</span></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 Villa Navis. All rights reserved.</span><div class="footer-legal"><a href="#" data-i18n="footer_privacy">Privacy</a><a href="#" data-i18n="footer_terms">Terms</a></div></div>
+  <div class="footer-bottom"><span>© 2026 DK Property. All rights reserved.</span><span class="footer-operator" data-i18n="footer_operator">Villa Navis is privately managed by DK Property d.o.o.</span></div>
 </footer>
 
 <!-- LIGHTBOX -->
@@ -897,7 +902,8 @@ const lbImages = [
   'images/wine-cellar.jpg',             // 12 showcase: Wine Cellar
   'images/gallery-aerial.jpg',          // 13 aerial
   'images/estate-pool.jpg',             // 14 pool terrace
-  'images/aerial-seaview.jpg'           // 15 exterior sea view
+  'images/aerial-seaview.jpg',          // 15 exterior sea view (heritage)
+  'images/estate-living.jpg'            // 16 estate living room
 ];
 let lbIdx = 0;
 function openLightbox(i) {
@@ -931,7 +937,7 @@ const T = {
     hero_eyebrow:"A Private Mediterranean Estate", hero_title:"Villa<br>Navis", hero_subtitle:"Where the Adriatic meets timeless elegance", hero_cta:"Reserve Your Stay", hero_scroll:"Discover",
     intro_overline:"Welcome", intro_heading:"A sanctuary of Mediterranean luxury, curated for those who seek the extraordinary",
     intro_text:"Nestled in the heart of Opatija, this exclusive 250m² private estate offers an unparalleled retreat on the Croatian Riviera. Three elegant bedrooms, a private infinity pool, and sweeping Adriatic views — every detail has been thoughtfully designed to deliver an experience that transcends the ordinary.",
-    navis_badge:'Same architect as <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    navis_badge:'Same architect as Design &amp; Boutique Hotel Navis',
     gallery_overline:"Gallery", gallery_heading:"A glimpse into your private escape",
     estate_overline:"The Estate", estate_heading:"Every detail designed for distinction",
     estate_text:"Over 250 square metres of refined living space, where world-class architecture meets the warmth of Mediterranean tradition. From the private pool overlooking the Adriatic to the expansive konoba built for gathering — this is a home that honours the art of living well.",
@@ -959,7 +965,7 @@ const T = {
     navis_link:"Discover Hotel Navis",
     footer_desc:"A private Mediterranean estate shaped by the same architect as Design & Boutique Hotel Navis.",
     footer_quick:"Quick Links", footer_contact_title:"Contact", footer_location:"Location",
-    footer_address:"Opatija, Croatia", footer_beach:"250m to beach", footer_center:"10 min to centre", footer_privacy:"Privacy", footer_terms:"Terms",
+    footer_address:"Opatija, Croatia", footer_beach:"250m to beach", footer_center:"10 min to centre", footer_operator:"Villa Navis is privately managed by DK Property d.o.o.",
     cal_days:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
     cal_months:["January","February","March","April","May","June","July","August","September","October","November","December"]
   },
@@ -969,7 +975,7 @@ const T = {
     hero_eyebrow:"Privatno mediteransko imanje", hero_title:"Villa<br>Navis", hero_subtitle:"Gdje Jadran susreće bezvremensku eleganciju", hero_cta:"Rezervirajte boravak", hero_scroll:"Otkrijte",
     intro_overline:"Dobrodošli", intro_heading:"Utočište mediteranskog luksuza, za one koji traže izvanredno",
     intro_text:"U srcu Opatije, ovo ekskluzivno privatno imanje od 250m² nudi neusporediv odmor na Hrvatskoj rivijeri. Tri elegantne spavaće sobe, privatni bazen i panoramski pogled na Jadran — svaki detalj pažljivo je osmišljen kako bi pružio iskustvo koje nadilazi uobičajeno.",
-    navis_badge:'Isti arhitekt kao <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    navis_badge:'Isti arhitekt kao Design &amp; Boutique Hotel Navis',
     gallery_overline:"Galerija", gallery_heading:"Pogled u vaš privatni raj",
     estate_overline:"Imanje", estate_heading:"Svaki detalj dizajniran za izvrsnost",
     estate_text:"Preko 250 četvornih metara profinjenoga životnog prostora, gdje se vrhunska arhitektura susreće s toplinom mediteranske tradicije. Od privatnog bazena s pogledom na Jadran do prostrane konobe stvorene za druženje — ovo je dom koji njeguje umijeće lijepog življenja.",
@@ -996,7 +1002,7 @@ const T = {
     navis_desc:"Hotel Navis redefinirao je luksuzno ugostiteljstvo na jadranskoj obali. Ista filozofija iznimnog dizajna, osobne usluge i pažnje prema detaljima sada se proteže i na ovo privatno imanje.",
     navis_link:"Otkrijte Hotel Navis",
     footer_desc:"Privatno mediteransko imanje koje je oblikovao isti arhitekt kao i Design & Boutique Hotel Navis.", footer_quick:"Brze poveznice", footer_contact_title:"Kontakt", footer_location:"Lokacija",
-    footer_address:"Opatija, Hrvatska", footer_beach:"250m do plaže", footer_center:"10 min do centra", footer_privacy:"Privatnost", footer_terms:"Uvjeti",
+    footer_address:"Opatija, Hrvatska", footer_beach:"250m do plaže", footer_center:"10 min do centra", footer_operator:"Villom Navis privatno upravlja DK Property d.o.o.",
     cal_days:["Pon","Uto","Sri","Čet","Pet","Sub","Ned"],
     cal_months:["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipanj","Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac"]
   },
@@ -1006,7 +1012,7 @@ const T = {
     hero_eyebrow:"Ein privates mediterranes Anwesen", hero_title:"Villa<br>Navis", hero_subtitle:"Wo die Adria auf zeitlose Eleganz trifft", hero_cta:"Aufenthalt reservieren", hero_scroll:"Entdecken",
     intro_overline:"Willkommen", intro_heading:"Ein Refugium mediterranen Luxus, kuratiert für jene, die das Außergewöhnliche suchen",
     intro_text:"Im Herzen von Opatija bietet dieses exklusive private Anwesen mit über 250m² einen unvergleichlichen Rückzugsort an der Kroatischen Riviera. Drei elegante Schlafzimmer, ein privater Pool und ein atemberaubender Blick auf die Adria.",
-    navis_badge:'Derselbe Architekt wie das <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    navis_badge:'Derselbe Architekt wie das Design &amp; Boutique Hotel Navis',
     gallery_overline:"Galerie", gallery_heading:"Ein Einblick in Ihre private Oase",
     estate_overline:"Das Anwesen", estate_heading:"Jedes Detail für Exzellenz gestaltet",
     estate_text:"Über 250 Quadratmeter raffinierter Wohnraum, wo Weltklasse-Architektur auf die Wärme mediterraner Tradition trifft.",
@@ -1033,7 +1039,7 @@ const T = {
     navis_desc:"Hotel Navis hat die Luxus-Gastfreundschaft an der Adriaküste neu definiert. Dieselbe Philosophie erstreckt sich nun auf dieses private Anwesen.",
     navis_link:"Hotel Navis entdecken",
     footer_desc:"Ein privates mediterranes Anwesen vom selben Architekten wie das Design & Boutique Hotel Navis.", footer_quick:"Schnelllinks", footer_contact_title:"Kontakt", footer_location:"Standort",
-    footer_address:"Opatija, Kroatien", footer_beach:"250m zum Strand", footer_center:"10 Min zum Zentrum", footer_privacy:"Datenschutz", footer_terms:"AGB",
+    footer_address:"Opatija, Kroatien", footer_beach:"250m zum Strand", footer_center:"10 Min zum Zentrum", footer_operator:"Die Villa Navis wird privat von DK Property d.o.o. verwaltet.",
     cal_days:["Mo","Di","Mi","Do","Fr","Sa","So"],
     cal_months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"]
   },
@@ -1043,7 +1049,7 @@ const T = {
     hero_eyebrow:"Una tenuta mediterranea privata", hero_title:"Villa<br>Navis", hero_subtitle:"Dove l'Adriatico incontra l'eleganza senza tempo", hero_cta:"Prenota il tuo soggiorno", hero_scroll:"Scopri",
     intro_overline:"Benvenuti", intro_heading:"Un santuario di lusso mediterraneo, curato per chi cerca lo straordinario",
     intro_text:"Nel cuore di Abbazia, questa esclusiva tenuta privata di 250m² offre un rifugio senza pari sulla Riviera Croata. Tre eleganti camere, piscina privata e vista mozzafiato sull'Adriatico.",
-    navis_badge:'Stesso architetto del <a href="https://www.hotel-navis.hr" target="_blank" rel="noopener">Design &amp; Boutique Hotel Navis</a>',
+    navis_badge:'Stesso architetto del Design &amp; Boutique Hotel Navis',
     gallery_overline:"Galleria", gallery_heading:"Uno sguardo alla vostra fuga privata",
     estate_overline:"La Tenuta", estate_heading:"Ogni dettaglio progettato per l'eccellenza",
     estate_text:"Oltre 250 metri quadrati di spazio raffinato, dove l'architettura di livello mondiale incontra il calore della tradizione mediterranea.",
@@ -1070,7 +1076,7 @@ const T = {
     navis_desc:"L'Hotel Navis ha ridefinito l'ospitalità di lusso sulla costa adriatica. La stessa filosofia si estende ora a questa tenuta privata.",
     navis_link:"Scopri Hotel Navis",
     footer_desc:"Una tenuta mediterranea privata progettata dallo stesso architetto del Design & Boutique Hotel Navis.", footer_quick:"Link rapidi", footer_contact_title:"Contatti", footer_location:"Posizione",
-    footer_address:"Abbazia, Croazia", footer_beach:"250m alla spiaggia", footer_center:"10 min al centro", footer_privacy:"Privacy", footer_terms:"Termini",
+    footer_address:"Abbazia, Croazia", footer_beach:"250m alla spiaggia", footer_center:"10 min al centro", footer_operator:"Villa Navis è gestita privatamente da DK Property d.o.o.",
     cal_days:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
     cal_months:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"]
   }
