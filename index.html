@@ -410,40 +410,30 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .booking-container { max-width: 1000px; margin: 0 auto; }
 .booking-header { text-align: center; margin-bottom: 60px; }
 .booking-note { font-size: 0.75rem; color: var(--color-text-light); text-align: center; margin-top: 8px; font-style: italic; }
-.booking-widget { background: var(--color-cream); border: 1px solid rgba(0,0,0,0.06); padding: 48px; box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
-.booking-calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
-.booking-month { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--color-dark); }
-.booking-nav-btns { display: flex; gap: 8px; }
-.booking-nav-btn {
-  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--color-stone); background: none; cursor: pointer; transition: all 0.3s; color: var(--color-text);
+/* Direct contact actions */
+.contact-actions {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 920px; margin: 0 auto;
 }
-.booking-nav-btn:hover { background: var(--color-dark); border-color: var(--color-dark); color: var(--color-cream); }
-.booking-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.cal-day-name { text-align: center; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-light); padding: 8px 0 16px; }
-.cal-day {
-  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 1rem; color: var(--color-text); cursor: pointer; transition: all 0.3s;
+.contact-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;
+  padding: 52px 28px; background: var(--color-cream);
+  border: 1px solid rgba(0,0,0,0.06); text-decoration: none; color: var(--color-text);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.04);
+  transition: transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.55s cubic-bezier(0.22,1,0.36,1), border-color 0.4s;
 }
-.cal-day:hover { background: var(--color-bg-warm); }
-.cal-day.available { color: var(--color-dark); font-weight: 500; }
-.cal-day.available:hover { background: var(--color-gold); color: var(--color-cream); }
-.cal-day.unavailable { color: var(--color-stone-light); cursor: default; text-decoration: line-through; }
-.cal-day.selected { background: var(--color-dark); color: var(--color-cream); }
-.cal-day.in-range { background: var(--color-bg-deep); }
-.cal-day.empty { cursor: default; }
-
-.booking-details { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,0.06); display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.booking-detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-light); margin-bottom: 6px; }
-.booking-detail-value { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-dark); }
-.booking-submit {
-  grid-column: 1 / -1; margin-top: 16px; padding: 18px 48px;
-  background: var(--color-dark); color: var(--color-cream); border: none;
-  font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
-  letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: all 0.4s; width: 100%;
+.contact-card:hover { transform: translateY(-6px); box-shadow: 0 32px 72px rgba(0,0,0,0.10); border-color: var(--color-stone); }
+.contact-card:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+.contact-card-icon {
+  width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; border: 1px solid var(--color-stone-light); color: var(--color-gold);
+  transition: all 0.45s cubic-bezier(0.22,1,0.36,1);
 }
-.booking-submit:hover { background: var(--color-gold); }
-.booking-guesty-note { text-align: center; margin-top: 24px; font-size: 0.7rem; color: var(--color-text-light); font-style: italic; }
+.contact-card:hover .contact-card-icon { background: var(--color-gold); border-color: var(--color-gold); color: var(--color-cream); transform: scale(1.06); }
+.contact-card-icon svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.contact-card-title { font-family: var(--font-display); font-size: 1.55rem; font-weight: 400; color: var(--color-dark); letter-spacing: 0.01em; }
+.contact-card-detail { font-size: 0.78rem; letter-spacing: 0.04em; color: var(--color-text-light); word-break: break-word; line-height: 1.5; }
+.contact-response { text-align: center; margin-top: 48px; font-size: 0.78rem; color: var(--color-text-light); font-style: italic; }
 
 /* ═══════════════════════════════════════
    NAVIS SECTION
@@ -572,8 +562,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .navis-content { grid-template-columns: 1fr; gap: 40px; }
 
   /* Booking */
-  .booking-widget { padding: 24px 20px; }
-  .booking-details { grid-template-columns: 1fr; }
+  .contact-actions { grid-template-columns: 1fr; max-width: 460px; gap: 18px; }
+  .contact-card { padding: 40px 28px; }
 
   /* Footer */
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
@@ -637,10 +627,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   /* Booking */
   .booking { padding: 60px 18px; }
-  .booking-widget { padding: 20px 16px; }
-  .booking-calendar-grid { gap: 2px; }
-  .cal-day { font-size: 0.82rem; }
-  .booking-submit { padding: 16px 24px; font-size: 0.65rem; }
+  .contact-card { padding: 34px 22px; gap: 14px; }
+  .contact-card-title { font-size: 1.4rem; }
 
   /* Navis */
   .navis { padding: 60px 18px; }
@@ -837,21 +825,24 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
       <h2 class="intro-heading" data-i18n="book_heading">Reserve your week in paradise</h2>
       <p class="booking-note" data-i18n="book_note">Minimum stay: 7 nights · Available June through August</p>
     </div>
-    <div class="booking-widget reveal" id="bookingWidget">
-      <div class="booking-calendar-header">
-        <button class="booking-nav-btn" onclick="changeMonth(-1)">&#8592;</button>
-        <span class="booking-month" id="calendarMonth"></span>
-        <button class="booking-nav-btn" onclick="changeMonth(1)">&#8594;</button>
-      </div>
-      <div class="booking-calendar-grid" id="calendarGrid"></div>
-      <div class="booking-details">
-        <div><div class="booking-detail-label" data-i18n="book_checkin">Check-in</div><div class="booking-detail-value" id="checkinDate" data-i18n="book_select">Select date</div></div>
-        <div><div class="booking-detail-label" data-i18n="book_checkout">Check-out</div><div class="booking-detail-value" id="checkoutDate" data-i18n="book_select">Select date</div></div>
-        <div><div class="booking-detail-label" data-i18n="book_total_label">Estimated Total</div><div class="booking-detail-value" id="totalPrice">—</div></div>
-        <button class="booking-submit" data-i18n="book_submit" onclick="submitBooking()">Request Reservation</button>
-      </div>
-      <p class="booking-guesty-note" data-i18n="book_guesty">Booking powered by Guesty · You will receive a confirmation within 24 hours</p>
+    <div class="contact-actions reveal">
+      <a class="contact-card" href="tel:+385992161927">
+        <span class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+        <span class="contact-card-title" data-i18n="act_call">Call</span>
+        <span class="contact-card-detail">+385 99 216 1927</span>
+      </a>
+      <a class="contact-card" href="https://wa.me/385992161927?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20The%20Residence%20Opatija." target="_blank" rel="noopener">
+        <span class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span>
+        <span class="contact-card-title" data-i18n="act_whatsapp">WhatsApp</span>
+        <span class="contact-card-detail">+385 99 216 1927</span>
+      </a>
+      <a class="contact-card" href="mailto:davor.kapetanovic@gmail.com?subject=The%20Residence%20Opatija%20-%20Reservation%20enquiry">
+        <span class="contact-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 6.5l9 7 9-7"/></svg></span>
+        <span class="contact-card-title" data-i18n="act_email">Email</span>
+        <span class="contact-card-detail">davor.kapetanovic@gmail.com</span>
+      </a>
     </div>
+    <p class="contact-response reveal" data-i18n="book_response">We personally respond to every enquiry within 24 hours.</p>
   </div>
 </section>
 
@@ -961,6 +952,8 @@ const T = {
     book_overline:"Reservations", book_heading:"Reserve your week in paradise", book_note:"Minimum stay: 7 nights · Available June through August",
     book_checkin:"Check-in", book_checkout:"Check-out", book_select:"Select date", book_rate:"Weekly Rate", book_total_label:"Estimated Total", book_submit:"Request Reservation",
     book_guesty:"Booking powered by Guesty · You will receive a confirmation within 24 hours",
+    act_call:"Call", act_whatsapp:"WhatsApp", act_email:"Email",
+    book_response:"We personally respond to every enquiry within 24 hours.",
     navis_overline:"Our Heritage", navis_heading:"From the visionaries behind Design & Boutique Hotel Navis",
     navis_desc:"Hotel Navis has redefined luxury hospitality on the Adriatic coast. That same philosophy of exceptional design, personal service, and meticulous attention to detail now extends to this private estate — offering an intimate alternative to the hotel experience, with the same uncompromising standards.",
     navis_link:"Discover Hotel Navis",
@@ -997,6 +990,8 @@ const T = {
     book_overline:"Rezervacije", book_heading:"Rezervirajte svoj tjedan u raju", book_note:"Minimalni boravak: 7 noći · Dostupno od lipnja do kolovoza",
     book_checkin:"Dolazak", book_checkout:"Odlazak", book_select:"Odaberite datum", book_rate:"Tjedna cijena", book_total_label:"Procijenjeni ukupni iznos", book_submit:"Zatraži rezervaciju",
     book_guesty:"Rezervacije putem sustava Guesty · Potvrdu ćete primiti u roku od 24 sata",
+    act_call:"Nazovite", act_whatsapp:"WhatsApp", act_email:"E-pošta",
+    book_response:"Na svaki upit osobno odgovaramo u roku od 24 sata.",
     navis_overline:"Naše nasljeđe", navis_heading:"Od vizionara koji stoje iza Design & Boutique Hotela Navis",
     navis_desc:"Hotel Navis redefinirao je luksuzno ugostiteljstvo na jadranskoj obali. Ista filozofija iznimnog dizajna, osobne usluge i pažnje prema detaljima sada se proteže i na ovo privatno imanje.",
     navis_link:"Otkrijte Hotel Navis",
@@ -1032,6 +1027,8 @@ const T = {
     book_overline:"Reservierung", book_heading:"Reservieren Sie Ihre Woche im Paradies", book_note:"Mindestaufenthalt: 7 Nächte · Juni bis August",
     book_checkin:"Anreise", book_checkout:"Abreise", book_select:"Datum wählen", book_rate:"Wochenpreis", book_total_label:"Geschätzter Gesamtbetrag", book_submit:"Reservierung anfragen",
     book_guesty:"Buchung über Guesty · Bestätigung innerhalb von 24 Stunden",
+    act_call:"Anrufen", act_whatsapp:"WhatsApp", act_email:"E-Mail",
+    book_response:"Wir beantworten jede Anfrage persönlich innerhalb von 24 Stunden.",
     navis_overline:"Unser Erbe", navis_heading:"Von den Visionären hinter dem Design & Boutique Hotel Navis",
     navis_desc:"Hotel Navis hat die Luxus-Gastfreundschaft an der Adriaküste neu definiert. Dieselbe Philosophie erstreckt sich nun auf dieses private Anwesen.",
     navis_link:"Hotel Navis entdecken",
@@ -1067,6 +1064,8 @@ const T = {
     book_overline:"Prenotazioni", book_heading:"Prenotate la vostra settimana in paradiso", book_note:"Soggiorno minimo: 7 notti · Giugno - Agosto",
     book_checkin:"Check-in", book_checkout:"Check-out", book_select:"Seleziona data", book_rate:"Tariffa settimanale", book_total_label:"Totale stimato", book_submit:"Richiedi prenotazione",
     book_guesty:"Prenotazione tramite Guesty · Conferma entro 24 ore",
+    act_call:"Chiama", act_whatsapp:"WhatsApp", act_email:"Email",
+    book_response:"Rispondiamo personalmente a ogni richiesta entro 24 ore.",
     navis_overline:"La Nostra Eredità", navis_heading:"Dai visionari dietro il Design & Boutique Hotel Navis",
     navis_desc:"L'Hotel Navis ha ridefinito l'ospitalità di lusso sulla costa adriatica. La stessa filosofia si estende ora a questa tenuta privata.",
     navis_link:"Scopri Hotel Navis",
@@ -1085,7 +1084,7 @@ function setLanguage(lang) {
   document.getElementById('currentLang').textContent = lang.toUpperCase();
   document.querySelectorAll('.nav-lang-option').forEach(o => o.classList.remove('active'));
   document.querySelectorAll('.nav-lang-option').forEach(o => { if(o.textContent.toLowerCase().includes(lang==='en'?'english':lang==='hr'?'hrvatski':lang==='de'?'deutsch':'italiano')) o.classList.add('active'); });
-  toggleLangDropdown(); renderCalendar();
+  toggleLangDropdown();
 }
 
 /* ═══ NAV ═══ */
@@ -1096,49 +1095,9 @@ function toggleMobileMenu() { mobileOpen=!mobileOpen; document.getElementById('h
 function closeMobileMenu() { mobileOpen=false; document.getElementById('hamburger').classList.remove('open'); document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow=''; }
 window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60); });
 
-/* ═══ CALENDAR ═══ */
-let calYear=2026, calMonth=5, checkin=null, checkout=null;
-const seasonStart=new Date(2026,5,1), seasonEnd=new Date(2026,7,31);
-function isAvailable(d) { return d>=seasonStart&&d<=seasonEnd; }
-function formatDate(d) { if(!d) return T[currentLang].book_select||'Select date'; return d.getDate()+' '+T[currentLang].cal_months[d.getMonth()]+' '+d.getFullYear(); }
-function renderCalendar() {
-  const t=T[currentLang], grid=document.getElementById('calendarGrid'); grid.innerHTML='';
-  document.getElementById('calendarMonth').textContent=t.cal_months[calMonth]+' '+calYear;
-  t.cal_days.forEach(d => { const e=document.createElement('div'); e.className='cal-day-name'; e.textContent=d; grid.appendChild(e); });
-  let s=new Date(calYear,calMonth,1).getDay()-1; if(s<0) s=6;
-  for(let i=0;i<s;i++){const e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
-  const dim=new Date(calYear,calMonth+1,0).getDate();
-  for(let d=1;d<=dim;d++){
-    const date=new Date(calYear,calMonth,d), el=document.createElement('div'); el.className='cal-day'; el.textContent=d;
-    if(isAvailable(date)){
-      el.classList.add('available'); el.addEventListener('click',()=>selectDate(date));
-      if(checkin&&checkout){ if(date>=checkin&&date<=checkout)el.classList.add('in-range'); if(date.getTime()===checkin.getTime()||date.getTime()===checkout.getTime())el.classList.add('selected'); }
-      else if(checkin&&date.getTime()===checkin.getTime()) el.classList.add('selected');
-    } else { el.classList.add('unavailable'); }
-    grid.appendChild(el);
-  }
-}
-function selectDate(date) {
-  if(!checkin||checkout){checkin=date;checkout=null;} else { if(date<=checkin)checkin=date; else checkout=date; }
-  document.getElementById('checkinDate').textContent=formatDate(checkin);
-  document.getElementById('checkoutDate').textContent=formatDate(checkout);
-  if(checkin&&checkout){const n=Math.round((checkout-checkin)/(864e5)); if(n>=7){document.getElementById('totalPrice').textContent='€'+(Math.ceil(n/7)*10000).toLocaleString();}else{document.getElementById('totalPrice').textContent='Min. 7 nights';}}
-  else{document.getElementById('totalPrice').textContent='—';}
-  renderCalendar();
-}
-function changeMonth(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
-function submitBooking(){
-  if(!checkin||!checkout){alert(currentLang==='hr'?'Molimo odaberite datume.':'Please select dates.');return;}
-  const n=Math.round((checkout-checkin)/864e5);
-  if(n<7){alert(currentLang==='hr'?'Minimalni boravak je 7 noći.':'Minimum stay is 7 nights.');return;}
-  alert(currentLang==='hr'?'Hvala! Vaš zahtjev za rezervaciju je poslan.':'Thank you! Your reservation request has been submitted. We will contact you within 24 hours.');
-}
-
 /* ═══ SCROLL REVEAL ═══ */
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-renderCalendar();
 </script>
 </body>
 </html>
